@@ -1,7 +1,8 @@
 import { Counter } from "./components/Counter";
 import { FetchData } from "./components/FetchData";
 import { Home } from "./components/Home";
-
+import { About } from "./components/About.tsx"
+import { Experience } from "./components/Experience"
 const AppRoutes = [
   {
     index: true,
@@ -14,7 +15,15 @@ const AppRoutes = [
   {
     path: '/fetch-data',
     element: <FetchData />
-  }
+  },
+  {
+    path: '/about',
+    element: <About />
+  },
+  {
+    path: '/experience',
+    element: <Experience />
+  },
 ];
 
 export default AppRoutes;
