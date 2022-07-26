@@ -19,7 +19,7 @@ namespace ResumeSiteApi.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public IEnumerable<WeatherForecast> Get(int test)
         {
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {

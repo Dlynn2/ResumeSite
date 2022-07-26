@@ -1,0 +1,75 @@
+
+.About{
+    /* width: 80%; */
+    /* margin-left: 10%; */
+}
+.about-header{
+    text-align: center;
+    background-color: #051E3E;
+    margin-bottom: 0;
+    color: #FFF;
+}
+.drive-list{
+    text-align: center;
+}
+
+.ApodImage{
+	max-width: 100%;
+}
+
+.wrapper {
+    background-color: #051E3E;
+    width: 100%;
+	height: 70vh;
+	color: white;
+	display: flex;
+	justify-content: center;
+    align-items: center;
+    font-size:xx-large ;
+}
+
+.text-to-spin {
+    animation: hmm 5s infinite;
+}
+
+@keyframes hmm {
+	0% {
+	color: #051E3E;
+	}
+	10% {  
+		color: #051E3E;
+	}
+	30% {
+		color: white;
+	}
+	50% {
+		color: #051E3E;
+	}
+	60% {
+		color: #051E3E;
+	}
+	80% {
+		color: white;
+	}
+	100% {
+		color: #051E3E;
+	}
+}
+
+.text-to-spin::after {
+	content: "Knowledge";
+    animation: text-arr 25s infinite;
+}
+
+@keyframes text-arr {
+        9%{ content: "Knowledge";}
+        18%{ content: "Happiness";}
+        27%{ content: "Desire";}
+        39%{ content: "test4";}
+        45%{ content: "test5";}
+        60%{ content: "test6";}
+        66%{ content: "test7";}
+        77%{ content: "test8";}
+        88%{ content: "test9";}
+        99% { content:"hmm "; }
+}
