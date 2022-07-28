@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import 'bootstrap';
 import '../css/About.css';
-// import { TextField } from '@material-ui/core'
-interface IProps {
 
-}
 interface IState {
     APODImgUrl: Promise<string>
 }
@@ -12,10 +9,6 @@ export class  About extends Component {
     state: IState = {
         APODImgUrl:  this.populateAPOD(new Date())
     }
-    constructor(props) {
-        super(props);
-    }
-    
     async populateAPOD(selectedDate: Date | null) : Promise<string> {
         if(!selectedDate){
             selectedDate = new Date();
@@ -51,7 +44,7 @@ export class  About extends Component {
                         />
                         <br></br>
                     </form>
-                    <img className='ApodImage' src={`${this.state.APODImgUrl}`} />
+                    <img className='ApodImage' alt='test' src={`${this.state.APODImgUrl}`} />
                 </div>
             </div >
         );
