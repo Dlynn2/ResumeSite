@@ -36,7 +36,7 @@ export default class App extends Component {
           </UncontrolledTooltip>
         </li>
         <li>
-          <a href="#" className="google" id="email"><i className="fa fa-envelope"></i></a>
+          <a href="https://www.linkedin.com/in/dylan-lynn-47b76965/" className="google" id="email"><i className="fa fa-envelope"></i></a>
           <UncontrolledTooltip placement="right" target="email">
             Email me!
           </UncontrolledTooltip>
@@ -48,13 +48,13 @@ export default class App extends Component {
           </UncontrolledTooltip>
         </li>
         <li>
-          <a href="#" className="resume"  id="resume"><i className="fa fa-file-pdf-o"></i></a>
+          <a href="https://www.linkedin.com/in/dylan-lynn-47b76965/" className="resume"  id="resume"><i className="fa fa-file-pdf-o"></i></a>
           <UncontrolledTooltip placement="right" target="resume">
             Download my resume.
           </UncontrolledTooltip>
         </li>
         <li>
-          <a href="#" className="resume"  id="resume"><i className="fa fa-file-pdf-o"></i></a>
+          <a href="https://www.linkedin.com/in/dylan-lynn-47b76965/" className="resume"  id="resume"><i className="fa fa-file-pdf-o"></i></a>
           <UncontrolledTooltip placement="right" target="resume">
             Download my resume.
           </UncontrolledTooltip>
