@@ -19,7 +19,7 @@ export class Experience extends React.Component {
                 <Col className="col-md-4 mt-auto mb-auto">
                     <Media>
                         <Media left middle href="#" >
-                            <Media src={CDCNLogo} alt="Generic placeholder image" className="col-md-12" />
+                            <Media src={CDCNLogo} alt="Generic placeholder image" className="col-md-12 mw-100" />
                         </Media>
                     </Media>
                 </Col>
@@ -42,7 +42,7 @@ export class Experience extends React.Component {
                 <Col className="col-md-4 mt-auto mb-auto">
                     <Media>
                         <Media left middle href="#" >
-                            <Media src={ampdLogo} alt="Generic placeholder image" className="col-md-12" />
+                            <Media src={ampdLogo} alt="Generic placeholder image" className="col-md-12 mw-100" />
                         </Media>
                     </Media>
                 </Col>
@@ -65,7 +65,7 @@ export class Experience extends React.Component {
                 <Col className="col-md-4 mt-auto mb-auto">
                     <Media>
                         <Media left middle href="#" >
-                            <Media src={MSULogo} alt="Generic placeholder image" className="col-md-12" />
+                            <Media src={MSULogo} alt="Generic placeholder image" className="col-md-12 mw-100" />
                         </Media>
                     </Media>
                 </Col>
@@ -88,7 +88,7 @@ export class Experience extends React.Component {
                 <Col className="col-md-4 mt-auto mb-auto">
                     <Media>
                         <Media left middle href="#" >
-                            <Media src={GapFillersLogo} alt="Generic placeholder image" className="col-md-12" />
+                            <Media src={GapFillersLogo} alt="Generic placeholder image" className="col-md-12 mw-100" />
                         </Media>
                     </Media>
                 </Col>
