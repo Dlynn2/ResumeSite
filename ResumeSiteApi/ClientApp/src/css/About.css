@@ -1,56 +1,95 @@
-
-.About{
-    /* width: 80%; */
-    /* margin-left: 10%; */
-}
-.about-header{
-    text-align: center;
-    background-color: #051E3E;
-    margin-bottom: 0;
-    color: #FFF;
-}
-.drive-list{
-    text-align: center;
+.About {
+	width: 80%;
+	margin-left: 10%;
 }
 
-.ApodImage{
+.about-header {
+	text-align: center;
+	background-color: #051E3E;
+	margin-bottom: 0;
+	color: #FFF;
+}
+
+.drive-list {
+	text-align: center;
+}
+
+.ApodImage {
+	opacity: 1;
 	max-width: 100%;
+	height: auto;
+	transition: .5s ease;
+	backface-visibility: hidden;
+}
+
+.overlayContainer {
+	position: relative;
+}
+
+.middle {
+	transition: .5s ease;
+	opacity: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	text-align: center;
+}
+
+.overlayContainer:hover .ApodImage {
+	opacity: 0.3;
+}
+
+.overlayContainer:hover .middle {
+	opacity: 1;
+}
+
+.text {
+	color: black;
+	font-size: 16px;
+	padding: 16px 32px;
 }
 
 .wrapper {
-    background-color: #051E3E;
-    width: 100%;
-	height: 70vh;
+	background-color: #051E3E;
+	height: 10vh;
 	color: white;
 	display: flex;
 	justify-content: center;
-    align-items: center;
-    font-size:xx-large ;
+	align-items: center;
+	font-size: xx-large;
 }
 
 .text-to-spin {
-    animation: hmm 5s infinite;
+	animation: hmm 5s infinite;
 }
 
 @keyframes hmm {
 	0% {
-	color: #051E3E;
-	}
-	10% {  
 		color: #051E3E;
 	}
+
+	10% {
+		color: #051E3E;
+	}
+
 	30% {
 		color: white;
 	}
+
 	50% {
 		color: #051E3E;
 	}
+
 	60% {
 		color: #051E3E;
 	}
+
 	80% {
 		color: white;
 	}
+
 	100% {
 		color: #051E3E;
 	}
@@ -58,18 +97,47 @@
 
 .text-to-spin::after {
 	content: "Knowledge";
-    animation: text-arr 25s infinite;
+	animation: text-arr 25s infinite;
 }
 
 @keyframes text-arr {
-        9%{ content: "Knowledge";}
-        18%{ content: "Happiness";}
-        27%{ content: "Desire";}
-        39%{ content: "test4";}
-        45%{ content: "test5";}
-        60%{ content: "test6";}
-        66%{ content: "test7";}
-        77%{ content: "test8";}
-        88%{ content: "test9";}
-        99% { content:"hmm "; }
+	9% {
+		content: "Knowledge";
+	}
+
+	18% {
+		content: "Happiness";
+	}
+
+	27% {
+		content: "Desire";
+	}
+
+	39% {
+		content: "Strength";
+	}
+
+	45% {
+		content: "Outdoors";
+	}
+
+	60% {
+		content: "Basketball";
+	}
+
+	66% {
+		content: "Space";
+	}
+
+	77% {
+		content: "Movies";
+	}
+
+	88% {
+		content: "Learning";
+	}
+
+	99% {
+		content: "Failure";
+	}
 }
