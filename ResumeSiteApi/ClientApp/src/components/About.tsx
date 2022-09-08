@@ -75,7 +75,7 @@ export class About extends Component<IState> {
                                 </div>
                             </div>
                             :
-                            <iframe className='ApodImage' src={`${this.state.APODUrl}`}></iframe>
+                            <iframe title="Title For IFrame" className='ApodImage' src={`${this.state.APODUrl}`}></iframe>
                             :
                             <div className="spinner-border text-primary" role="status">
                                 <span className="sr-only">Loading...</span>
