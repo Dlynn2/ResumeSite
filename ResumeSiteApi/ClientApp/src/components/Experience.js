@@ -12,101 +12,108 @@ export class Experience extends React.Component {
         };
     }
     render() {
-        return(
-        <div className="Experience">
-            <h1 className="top-header">What I'm doing</h1>
-            <Row xs="1" sm="2" md="2">
-                <Col className="col-md-4 mt-auto mb-auto">
-                    <Media>
-                        <Media left middle href="#" >
-                            <Media src={CDCNLogo} alt="Generic placeholder image" className="col-md-12 mw-100" />
+        return (
+            <div className="Experience">
+                <h1 className="top-header">What I'm doing</h1>
+                <Row xs="1" sm="2" md="2">
+                    <Col className="col-md-4 mt-auto mb-auto">
+                        <Media>
+                            <Media left middle href="#" >
+                                <Media src={CDCNLogo} alt="Generic placeholder image" className="col-md-12 mw-100" />
+                            </Media>
                         </Media>
-                    </Media>
-                </Col>
+                    </Col>
 
-                <Col className="col-md-8">
-                    <Media body>
-                        <Media heading>
-                            Consumer Direct Care Network
-                        </Media>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                    </Media>
-                </Col>
-            </Row>
+                    <Col className="col-md-8">
+                        <Media body>
+                            <Media heading>
+                                Consumer Direct Care Network
+                            </Media>
+                            Incorporated cybersecurity priorities into development projects to reduce
+                            potential liability and increase customer security.
+                            ● Created long-term development plans to optimize performance within
+                            multi-project and multi-team environments.
+                            ● Recruited technical subject matter experts to plan and monitor software
+                            development teams through phases of project completion.
+                            ● Estimated work hours and tracked progress using Scrum methodology.
+                            ● Coordinated deployments of new software, feature updates and fixes.
+                            ● Built databases and table structures for web applications.
+                            ● Tested and deployed scalable and highly available software products.
 
-            <Row xs="1" sm="2" md="2">
-                <Col className="col-md-4 mt-auto mb-auto">
-                    <Media>
-                        <Media left middle href="#" >
-                            <Media src={ampdLogo} alt="Generic placeholder image" className="col-md-12 mw-100" />
                         </Media>
-                    </Media>
-                </Col>
+                    </Col>
+                </Row>
 
-                <Col className="col-md-8">
-                    <Media body>
-                        <Media heading>
-                            AMPD Engagement
+                <Row xs="1" sm="2" md="2">
+                    <Col className="col-md-4 mt-auto mb-auto">
+                        <Media>
+                            <Media left middle href="#" >
+                                <Media src={ampdLogo} alt="Generic placeholder image" className="col-md-12 mw-100" />
+                            </Media>
                         </Media>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                    </Media>
-                </Col>
-            </Row>
+                    </Col>
 
-            <Row xs="1" sm="2" md="2">
-                <Col className="col-md-4 mt-auto mb-auto">
-                    <Media>
-                        <Media left middle href="#" >
-                            <Media src={MSULogo} alt="Generic placeholder image" className="col-md-12 mw-100" />
+                    <Col className="col-md-8">
+                        <Media body>
+                            <Media heading>
+                                AMPD Engagement
+                            </Media>
+                            Web App designed for teachers and researchers to collect and visualize data from students in their classes.
+                            Worked with team members to deliver a web application. written using React, JavaScript, MySQL, Sequelize (ORM),
+                            Express (Server), and other APIs and packages.
+                            Created multiple views for different that render without refreshing.
+                            Connected MySQL server to Front end along with R shiny
+                            Server.
                         </Media>
-                    </Media>
-                </Col>
+                    </Col>
+                </Row>
 
-                <Col className="col-md-8">
-                    <Media body>
-                        <Media heading>
-                            Montana State University
+                <Row xs="1" sm="2" md="2">
+                    <Col className="col-md-4 mt-auto mb-auto">
+                        <Media>
+                            <Media left middle href="#" >
+                                <Media src={MSULogo} alt="Generic placeholder image" className="col-md-12 mw-100" />
+                            </Media>
                         </Media>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                    </Media>
-                </Col>
-            </Row>
+                    </Col>
 
-            <Row xs="1" sm="2" md="2">
-                <Col className="col-md-4 mt-auto mb-auto">
-                    <Media>
-                        <Media left middle href="#" >
-                            <Media src={GapFillersLogo} alt="Generic placeholder image" className="col-md-12 mw-100" />
-                        </Media>
-                    </Media>
-                </Col>
+                    <Col className="col-md-8">
+                        <Media body>
+                            <Media heading>
+                                Montana State University
+                            </Media>
+                            Bachelor's in Computer Science and a Minor in statistics.
+                            Montana State University - Bozeman, MT
+                            August 2017 to May 2020
+                            GPA: 3.8
+                            College was a lot of work and a lot of fun!
 
-                <Col className="col-md-8">
-                    <Media body>
-                        <Media heading>
-                            Gap FIllers Flathead
                         </Media>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                    </Media>
-                </Col>
-            </Row>
-        </div>
+                    </Col>
+                </Row>
+
+                <Row xs="1" sm="2" md="2">
+                    <Col className="col-md-4 mt-auto mb-auto">
+                        <Media>
+                            <Media left middle href="#" >
+                                <Media src={GapFillersLogo} alt="Generic placeholder image" className="col-md-12 mw-100" />
+                            </Media>
+                        </Media>
+                    </Col>
+
+                    <Col className="col-md-8">
+                        <Media body>
+                            <Media heading>
+                                Gap FIllers Flathead
+                            </Media>
+                            Non-profit that focuses on helping students in need particularly girls in middle school or high school.
+                            Created Website using HTML5, CSS, and JavaScript.
+                            Worked CSS so it is Mobile friendly. INTERESTS
+                            Maintain server and SEO.
+                        </Media>
+                    </Col>
+                </Row>
+            </div>
         )
     }
 }

@@ -121,7 +121,7 @@ code {
       color: white;
   }
   .icon-bar{
-    margin-bottom: 0;
+    margin-bottom: -1px;
   }
   .icon-bar li{
     margin-bottom: 0px;

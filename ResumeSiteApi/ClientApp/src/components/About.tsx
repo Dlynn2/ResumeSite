@@ -70,8 +70,8 @@ export class About extends Component<IState> {
                         !this.state.loading ? this.isImage(this.state.APODUrl) ?
                             <div className="overlayContainer">
                                 <img className='ApodImage' alt='test' src={`${this.state.APODUrl}`} />
-                                <div class="middle">
-                                    <div class="text">{this.state.APODExplanation}</div>
+                                <div className="middle">
+                                    <div className="text">{this.state.APODExplanation}</div>
                                 </div>
                             </div>
                             :
