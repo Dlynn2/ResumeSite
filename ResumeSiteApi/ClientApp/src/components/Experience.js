@@ -29,17 +29,29 @@ export class Experience extends React.Component {
                             <Media heading>
                                 Consumer Direct Care Network
                             </Media>
-                            Incorporated cybersecurity priorities into development projects to reduce
-                            potential liability and increase customer security.
-                            ● Created long-term development plans to optimize performance within
-                            multi-project and multi-team environments.
-                            ● Recruited technical subject matter experts to plan and monitor software
-                            development teams through phases of project completion.
-                            ● Estimated work hours and tracked progress using Scrum methodology.
-                            ● Coordinated deployments of new software, feature updates and fixes.
-                            ● Built databases and table structures for web applications.
-                            ● Tested and deployed scalable and highly available software products.
-
+                            <ul>
+                                <li>
+                                    Incorporated cybersecurity priorities into development projects to reduce
+                                    potential liability and increase customer security.
+                                </li>
+                                <li>
+                                    Created long-term development plans to optimize performance within
+                                    multi-project and multi-team environments.
+                                </li>
+                                <li>
+                                    Recruited technical subject matter experts to plan and monitor software
+                                    development teams through phases of project completion.
+                                </li>
+                                <li>
+                                    Estimated work hours and tracked progress using Scrum methodology.
+                                </li>
+                                <li>
+                                    Built databases and table structures for web applications.
+                                </li>
+                                <li>
+                                    Tested and deployed scalable and highly available software products.
+                                </li>
+                            </ul>
                         </Media>
                     </Col>
                 </Row>
@@ -59,11 +71,21 @@ export class Experience extends React.Component {
                                 AMPD Engagement
                             </Media>
                             Web App designed for teachers and researchers to collect and visualize data from students in their classes.
-                            Worked with team members to deliver a web application. written using React, JavaScript, MySQL, Sequelize (ORM),
-                            Express (Server), and other APIs and packages.
-                            Created multiple views for different that render without refreshing.
-                            Connected MySQL server to Front end along with R shiny
-                            Server.
+                            <ul>
+                                <li>
+                                    Worked with team members to deliver a web application.
+                                </li>
+                                <li>
+                                    written using React, JavaScript, MySQL, Sequelize (ORM), Express (Server), and other APIs and packages.
+                                </li>
+                                <li>
+                                    Created multiple views for different that render without refreshing.
+                                </li>
+                                <li>
+                                    Connected MySQL server to Front end along with R shiny
+                                    Server.
+                                </li>
+                            </ul>
                         </Media>
                     </Col>
                 </Row>
@@ -83,11 +105,18 @@ export class Experience extends React.Component {
                                 Montana State University
                             </Media>
                             Bachelor's in Computer Science and a Minor in statistics.
-                            Montana State University - Bozeman, MT
-                            August 2017 to May 2020
-                            GPA: 3.8
+                            <ul>
+                                <li>
+                                Montana State University - Bozeman, MT
+                                </li>
+                                <li>
+                                August 2017 to May 2020
+                                </li>
+                                <li>
+                                GPA: 3.8
+                                </li>
+                            </ul>
                             College was a lot of work and a lot of fun!
-
                         </Media>
                     </Col>
                 </Row>
@@ -107,9 +136,17 @@ export class Experience extends React.Component {
                                 Gap FIllers Flathead
                             </Media>
                             Non-profit that focuses on helping students in need particularly girls in middle school or high school.
-                            Created Website using HTML5, CSS, and JavaScript.
-                            Worked CSS so it is Mobile friendly. INTERESTS
-                            Maintain server and SEO.
+                            <ul>
+                                <li>
+                                Created Website using HTML5, CSS, and JavaScript.
+                                </li>
+                                <li>
+                                Worked CSS so it is Mobile friendly.
+                                </li>
+                                <li>
+                                Maintain server and SEO.
+                                </li>
+                            </ul>
                         </Media>
                     </Col>
                 </Row>

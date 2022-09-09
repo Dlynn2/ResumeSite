@@ -45,7 +45,7 @@
 	opacity: 1;
 }
 
-@media screen and (min-device-width: 641px) {
+@media screen and (max-device-width: 640px) {
 	.middle {
 		transition: .5s ease;
 		opacity: 0;
