@@ -8,6 +8,7 @@ interface IState {
     loading: boolean;
 }
 export class About extends Component<IState> {
+    //quotes and things that inspire me.
     state: IState;
     noImage = false;
     constructor() {

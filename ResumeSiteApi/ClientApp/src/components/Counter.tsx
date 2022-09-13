@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 export class Counter extends Component {
   static displayName = Counter.name;
+  state: { currentCount: number; };
 
   constructor(props) {
     super(props);

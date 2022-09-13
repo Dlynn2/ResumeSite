@@ -1,6 +1,6 @@
-import { Counter } from "./components/Counter";
+import { Counter } from "./components/Counter.tsx";
 import { FetchData } from "./components/FetchData";
-import { Home } from "./components/Home";
+import { Home } from "./components/Home.tsx";
 import { About } from "./components/About.tsx"
 import { Experience } from "./components/Experience"
 const AppRoutes = [
