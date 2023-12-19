@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { UncontrolledTooltip } from 'reactstrap';
 import '../../custom.css';
 import EmailModal from '../EmailModal/EmailModal';
@@ -61,6 +61,7 @@ class IconBar extends React.Component {
                         </UncontrolledTooltip>
                     </li>
                     <li>
+                        {/* eslint-disable-next-line */}
                         <a onClick={this.greeting} className="google" id="email"><i className="fa fa-envelope"></i></a>
                         <UncontrolledTooltip placement="right" target="email">
                             Email me!
