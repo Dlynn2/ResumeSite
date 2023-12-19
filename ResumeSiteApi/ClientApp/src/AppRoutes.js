@@ -1,8 +1,8 @@
 import { Counter } from "./components/Counter.tsx";
 import { FetchData } from "./components/FetchData";
 import { Home } from "./components/Home.tsx";
-import { About } from "./components/About.tsx"
-import { Experience } from "./components/Experience"
+import { Inspiration } from "./components/Inspirations.tsx"
+import Experience from "./components/Experience";
 const AppRoutes = [
   {
     index: true,
@@ -17,8 +17,8 @@ const AppRoutes = [
     element: <FetchData />
   },
   {
-    path: '/about',
-    element: <About />
+    path: '/Inspiration',
+    element: <Inspiration />
   },
   {
     path: '/experience',
