@@ -48,7 +48,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");
 
-app.MapFallbackToFile("index.html");
+app.MapFallbackToFile("");
 app.UseSwagger();
 app.UseSwaggerUI(options =>
 {

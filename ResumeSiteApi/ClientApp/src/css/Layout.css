@@ -1,0 +1,11 @@
+/* Light mode styles */
+.light-mode {
+    background-color: #fff; /* Set your light mode background color */
+    color: #333; /* Set your light mode text color */
+  }
+  
+  /* Dark mode styles */
+  .dark-mode {
+    background-color: #333; /* Set your dark mode background color */
+    color: #fff; /* Set your dark mode text color */
+  }

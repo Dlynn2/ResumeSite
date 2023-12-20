@@ -90,14 +90,21 @@ code {
   /* Style the icon bar links */
   .icon-bar a {
     display: grid;
-      text-align: center;
-      padding: 14px;
-      transition: all 0.3s ease;
-      color: white;
-      font-size: 20px;
-      border-radius: 50%;
-      margin-bottom: 15px;
-      margin-left: 24px;
+    text-align: center;
+    padding: 14px;
+    transition: all 0.3s ease;
+    color: white;
+    font-size: 20px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    margin-left: 24px;
+    /* Explicitly set the color for the icons */
+    fill: currentColor;
+    stroke: currentColor;
+  }
+
+  .icon-bar a svg {
+    fill: currentColor;
   }
   
   /* Style the social media icons with color, if you want */
