@@ -21,8 +21,10 @@ const Inspiration: React.FC = () => {
     loading: true
   });
 
-  const [noImage, setNoImage] = useState(false);
-
+  const [setNoImage] = useState(false);
+  useEffect(() => {
+    populateAPOD(new Date());
+  }, ); 
   const populateAPOD = async (selectedDate: Date | null): Promise<string> => {
     setState({ ...state, loading: true });
 
@@ -40,9 +42,7 @@ const Inspiration: React.FC = () => {
 
       if (data.url) {
         setState({ APODUrl: data.url, APODExplanation: data.explanation, loading: false });
-        setNoImage(false);
       } else {
-        setNoImage(true);
       }
 
       return data.url;
@@ -60,6 +60,7 @@ const Inspiration: React.FC = () => {
     return date.toLocaleDateString('en-CA');
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     populateAPOD(new Date());
   }, []); // Empty dependency array to mimic componentDidMount
