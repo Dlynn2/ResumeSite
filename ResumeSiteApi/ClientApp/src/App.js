@@ -10,15 +10,25 @@ import './custom.css';
 export default class App extends Component {
   static displayName = App.name;
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      darkMode: true,
+    };
+  }
+
+  toggleDarkMode = () => {
+    this.setState((prevState) => ({
+      darkMode: !prevState.darkMode,
+    }));
+  };
+  
   render() {
+    const { darkMode } = this.state;
     return (
       <>
-        <head>
-          {/* Move the Font Awesome CSS link to the head */}
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-        </head>
-        <div className="App">
-          <Layout>
+        <div  className={'App ' + darkMode ? 'dark-mode' : 'light-mode'}>
+          <Layout  toggleDarkMode={this.toggleDarkMode} darkMode={darkMode}>
             <Routes>
               {AppRoutes.map((route, index) => {
                 const { element, ...rest } = route;
