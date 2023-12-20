@@ -55,9 +55,9 @@ const Inspiration: React.FC = () => {
     return date.toLocaleDateString('en-CA');
   };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     populateAPOD(new Date());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Empty dependency array to mimic componentDidMount
 
   const images = [Knowledge, Outdoors, Learning, Failure, Space];
