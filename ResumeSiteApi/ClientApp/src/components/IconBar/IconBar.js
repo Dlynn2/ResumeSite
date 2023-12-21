@@ -1,6 +1,6 @@
 import React from 'react';
 import { UncontrolledTooltip } from 'reactstrap';
-import '../../custom.css';
+import '../../css/custom.css';
 import EmailModal from '../EmailModal/EmailModal';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

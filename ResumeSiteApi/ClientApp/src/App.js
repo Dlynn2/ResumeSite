@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import AppRoutes from './AppRoutes';
 import IconBar from './components/IconBar/IconBar';
-import { Layout } from './components/Layout';
+import { Layout } from './components/Layout.tsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import './custom.css';
+import './css/custom.css';
 
 export default class App extends Component {
   static displayName = App.name;

@@ -1,7 +1,7 @@
 import React from 'react';
 import '../css/Contact.css'
 import 'bootstrap'
-import '../logo_original.png'
+import '../images/logo_original.png'
 function Contact() {
     return (
         <div className="Contact">

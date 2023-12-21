@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap';
 import '../css/About.css';
 import ImageSlider from './ImageSlider.tsx';
-import Knowledge from '../Knowledge.jpg';
-import Outdoors from '../Outdoors.jpg';
-import Space from '../Space.jpg';
-import Learning from '../Learning.jpg';
-import Failure from '../Failure.jpg';
+import Knowledge from '../images/Knowledge.jpg';
+import Outdoors from '../images/Outdoors.jpg';
+import Space from '../images/Space.jpg';
+import Learning from '../images/Learning.jpg';
+import Failure from '../images/Failure.jpg';
 
 interface IState {
   APODUrl: string;
@@ -57,7 +57,7 @@ const Inspiration: React.FC = () => {
 
   useEffect(() => {
     populateAPOD(new Date());
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Empty dependency array to mimic componentDidMount
 
   const images = [Knowledge, Outdoors, Learning, Failure, Space];
@@ -70,36 +70,38 @@ const Inspiration: React.FC = () => {
   ];
 
   return (
-    <div className="Inspiration">
-      <ImageSlider images={images} descriptions={descriptions} />
-      <div className="float-right">
-        <form className="form-inline" noValidate>
-          <label className="mr-2">Astronomy picture of the day from NASA!</label>
-          <input
-            id="date"
-            type="date"
-            className="form-control mr-2"
-            defaultValue={getDateAsString(new Date())}
-            onChange={(e) => populateAPOD(e.target.valueAsDate)}
-          />
-        </form>
+    <div className="Inspiration container d-flex justify-content-center">
+      <div>
+        <ImageSlider images={images} descriptions={descriptions} />
+        <div className="float-right">
+          <form className="form-inline" noValidate>
+            <label className="mr-2">Astronomy picture of the day from NASA!</label>
+            <input
+              id="date"
+              type="date"
+              className="form-control mr-2"
+              defaultValue={getDateAsString(new Date())}
+              onChange={(e) => populateAPOD(e.target.valueAsDate)}
+            />
+          </form>
 
-        {!state.loading ? (
-          isImage(state.APODUrl) ? (
-            <div className="overlayContainer">
-              <img className="ApodImage img-fluid" alt="APOD" src={state.APODUrl} />
-              <div className="middle">
-                <div className="text">{state.APODExplanation}</div>
+          {!state.loading ? (
+            isImage(state.APODUrl) ? (
+              <div className="overlayContainer">
+                <img className="ApodImage img-fluid" alt="APOD" src={state.APODUrl} />
+                <div className="middle">
+                  <div className="text">{state.APODExplanation}</div>
+                </div>
               </div>
-            </div>
+            ) : (
+              <iframe title="Title For IFrame" className="ApodImage" src={state.APODUrl || ''} />
+            )
           ) : (
-            <iframe title="Title For IFrame" className="ApodImage" src={state.APODUrl || ''} />
-          )
-        ) : (
-          <div className="spinner-border text-primary" role="status">
-            <span className="sr-only">Loading...</span>
-          </div>
-        )}
+            <div className="spinner-border text-primary" role="status">
+              <span className="sr-only">Loading...</span>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

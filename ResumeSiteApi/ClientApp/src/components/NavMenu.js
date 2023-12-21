@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Collapse, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import './NavMenu.css';
-import sunIcon from './../Sun-Icon.png';
+import './../css/NavMenu.css';
+import sunIcon from './../images/Sun-Icon.png';
 
 export class NavMenu extends Component {
   static displayName = NavMenu.name;

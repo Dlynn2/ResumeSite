@@ -1,11 +1,20 @@
-import React, { Component } from 'react';
+import React, { Component, ReactNode } from 'react';
 import { Container } from 'reactstrap';
 import { NavMenu } from './NavMenu';
 import '../css/Layout.css';
-export class Layout extends Component {
+
+interface LayoutProps {
+  children?: ReactNode;
+}
+
+interface LayoutState {
+  darkMode: boolean;
+}
+
+export class Layout extends Component<LayoutProps, LayoutState> {
   static displayName = Layout.name;
 
-  constructor(props) {
+  constructor(props: LayoutProps) {
     super(props);
     this.state = {
       darkMode: true,
@@ -20,10 +29,10 @@ export class Layout extends Component {
 
   render() {
     return (
-      <div className={this.state.darkMode ? 'dark-mode' : 'light-mode'}>
+      <div className={`full-width-layout ${this.state.darkMode ? 'dark-mode' : 'light-mode'}`}>
         <NavMenu 
-        toggleDarkMode={this.toggleDarkMode}
-        darkMode={this.state.darkMode}
+          toggleDarkMode={this.toggleDarkMode}
+          darkMode={this.state.darkMode}
         />
         <Container>
           {this.props.children}

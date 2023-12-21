@@ -1,10 +1,10 @@
 import React from 'react';
 import { Row, Col, Media } from 'reactstrap';
 import '../css/Experience.css';
-import CDCNLogo from '../CDCN_Logo.png';
-import ampdLogo from '../logo_original.png';
-import MSULogo from '../Montana_State_Bobcats_logo.svg.png';
-import GapFillersLogo from '../gap-fillers-flathead-logo.png';
+import CDCNLogo from '../images/CDCN_Logo.png';
+import ampdLogo from '../images/logo_original.png';
+import MSULogo from '../images/Montana_State_Bobcats_logo.svg.png';
+import GapFillersLogo from '../images/gap-fillers-flathead-logo.png';
 
 class Experience extends React.Component {
     constructor(props) {
