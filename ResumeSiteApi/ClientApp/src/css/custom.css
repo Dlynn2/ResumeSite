@@ -47,27 +47,31 @@ code {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
+
 .landing-container {
   position: relative;
   display: block;
   width: 100vw;
   height: 100vh;
-  background-image: linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),url("./../images/test2.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url("./../images/test2.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
   margin-top: -1rem;
 }
+
 .landing-image {
   display: block;
   width: 100%;
   height: 100vh;
 }
+
 .overlay {
   font-family: calibri;
   position: absolute;
@@ -78,6 +82,7 @@ code {
   font-size: 200%;
   text-align: center;
 }
+
 @media screen and (min-device-width: 641px) {
   .icon-bar {
     position: fixed;
@@ -88,7 +93,7 @@ code {
     transform: translateY(-50%);
     padding: 0px;
   }
-  
+
   /* Style the icon bar links */
   .icon-bar a {
     display: grid;
@@ -108,42 +113,54 @@ code {
   .icon-bar a svg {
     fill: currentColor;
   }
-  
+
   /* Style the social media icons with color, if you want */
   .icon-bar a:hover {
-    background-color: black ;
+    background-color: black;
   }
 }
 
 @media screen and (max-device-width: 640px) {
-  .icon-bar{
+  .icon-bar {
     position: fixed;
-    display: inline-flex;
+    display: flex;
+    justify-content: center;
     list-style: none;
     width: 100%;
     bottom: 0;
     left: 0;
-    margin-top: 0px;
-    padding-left: 0px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
   }
+
   .icon-bar a {
-      color: white;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* Set the height of the anchor tags */
   }
-  .icon-bar{
-    margin-bottom: 0px;
-  }
-  .icon-bar li{
-    margin-bottom: 0px;
+
+  .icon-bar li {
+    margin: 0;
     width: 20%;
   }
-  .icon-bar i{
+
+  .icon-bar i {
     width: 100%;
   }
+
+  .fa{
+    font-size: x-large;
+  }
 }
-.facebook{
+
+.facebook {
   background: #3B5998;
 }
-.facebook:hover{
+
+.facebook:hover {
   color: #3B5998;
 }
 
@@ -151,9 +168,11 @@ code {
   background: #55ACEE;
   color: white;
 }
-.github:hover{
+
+.github:hover {
   color: green;
 }
+
 .google {
   background: #dd4b39;
   color: white;
@@ -163,13 +182,16 @@ code {
   background: #007bb5;
   color: white;
 }
-.linkedin:hover{
+
+.linkedin:hover {
   color: #007bb5;
 }
+
 .resume {
   background: #bb0000;
   color: white;
 }
-.resume:hover{
+
+.resume:hover {
   color: white;
 }
