@@ -1,0 +1,6 @@
+@ResumeSite.Server_HostAddress = http://localhost:5237
+
+GET {{ResumeSite.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

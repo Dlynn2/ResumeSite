@@ -1,0 +1,220 @@
+/* Provide sufficient contrast against white background */
+/* a {
+  color: #0366d6;
+} */
+
+code {
+  color: #E01A76;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  /* color: --primary-color; */
+}
+
+
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* .landing-container {
+  position: relative;
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  background-image: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url("./../images/test2.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  margin-top: -1rem;
+} */
+
+/* .landing-image {
+  display: block;
+  width: 100%;
+  height: 100vh;
+} */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+/* Ensure the main layout container fills the available space */
+.layout-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.overlay {
+  font-family: calibri;
+  position: absolute;
+  top: 16vh;
+  color: #f1f1f1;
+  width: 100%;
+  color: white;
+  font-size: 200%;
+  text-align: center;
+}
+
+@media screen and (min-device-width: 641px) {
+  .icon-bar {
+    position: fixed;
+    top: 50%;
+    z-index: 1;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    padding: 0px;
+  }
+
+  /* Style the icon bar links */
+  .icon-bar a {
+    display: grid;
+    text-align: center;
+    padding: 14px;
+    transition: all 0.3s ease;
+    /* color: --primary-color; */
+    font-size: 20px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    margin-left: 24px;
+    /* Explicitly set the color for the icons */
+    fill: currentColor;
+    stroke: currentColor;
+  }
+
+  .icon-bar a svg {
+    fill: currentColor;
+  }
+
+  /* Style the social media icons with color, if you want */
+  .icon-bar a:hover {
+    background-color: rgb(174, 174, 174);
+  }
+}
+
+@media screen and (max-device-width: 640px) {
+  .icon-bar {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+
+  .icon-bar a {
+    color: #1976d2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* Set the height of the anchor tags */
+  }
+
+  .icon-bar li {
+    margin: 0;
+    width: 20%;
+  }
+
+  .icon-bar i {
+    width: 100%;
+  }
+
+  .fa{
+    font-size: x-large;
+  }
+}
+
+.facebook {
+  background: #3B5998;
+}
+
+.facebook:hover {
+  color: #3B5998;
+}
+
+.github {
+  background: #55ACEE;
+  color: white;
+}
+
+.github:hover {
+  color: green;
+}
+
+.google {
+  background: #dd4b39;
+  color: white;
+}
+
+.linkedin {
+  background: #007bb5;
+  color: white;
+}
+
+.linkedin:hover {
+  color: #007bb5;
+}
+
+.resume {
+  background: #bb0000;
+  color: white;
+}
+
+.resume:hover {
+  color: white;
+}
+
+@media (min-width: 600px) {
+  .css-3jum49-MuiContainer-root {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .css-3jum49-MuiContainer-root {
+      max-width: 100% !important;
+  }
+}
