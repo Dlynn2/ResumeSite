@@ -21,10 +21,9 @@ const IconBar = () => {
     const displaySuccessMessage = () => {
         toast.success('Email sent!');
     };
-    useEffect(() => {
-        console.log('Theme changed to:', theme.palette.primary.main);
-        // Perform any action on theme change
-    }, [theme]); // Dependency on theme mode
+    const displayErrorMessage = () => {
+        toast.error('Email sent!');
+    };
 
     const email = async (emailSubject: any, emailBody: any) => {
         try {
@@ -40,7 +39,7 @@ const IconBar = () => {
             if (!error) {
                 displaySuccessMessage();
             } else {
-                displaySuccessMessage(); // Consider showing an error message here instead
+                displayErrorMessage(); // Consider showing an error message here instead
             }
         } catch (error) {
             console.error('Error sending email:', error);
@@ -68,13 +67,13 @@ const IconBar = () => {
                         </IconButton>
                     </Tooltip>
                 </li>
-                <li>
+                {/* <li>
                     <Tooltip title="Email me!" placement="right">
                         <IconButton component="a" onClick={toggleEmailModal} sx={{ color: theme.palette.secondary.main }}>
                             <EmailIcon />
                         </IconButton>
                     </Tooltip>
-                </li>
+                </li> */}
                 <li>
                     <Tooltip title="LinkedIn" placement="right">
                         <IconButton component="a" href="https://www.linkedin.com/in/dylan-lynn-47b76965/" sx={{ color: theme.palette.secondary.main }}>
@@ -82,13 +81,13 @@ const IconBar = () => {
                         </IconButton>
                     </Tooltip>
                 </li>
-                <li>
+                {/* <li>
                     <Tooltip title="Download my resume." placement="right">
                         <IconButton component="a" href="https://www.linkedin.com/in/dylan-lynn-47b76965/" sx={{ color: theme.palette.secondary.main }}>
                             <PictureAsPdfIcon />
                         </IconButton>
                     </Tooltip>
-                </li>
+                </li> */}
             </ul>
             {isEmailPopOpen && (
                 <EmailModal isOpen={isEmailPopOpen} openClose={toggleEmailModal} email={email} />

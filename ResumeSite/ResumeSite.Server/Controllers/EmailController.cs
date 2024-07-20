@@ -1,12 +1,9 @@
 ﻿namespace ResumeSite.Server.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using RestSharp;
     using ResumeSite.Server.DTO;
     using SendGrid;
     using SendGrid.Helpers.Mail;
-    using System.Text.Json;
-    using System.Text.Json.Serialization;
 
     [ApiController]
     [Route("[controller]")]

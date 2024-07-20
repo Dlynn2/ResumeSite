@@ -3,13 +3,12 @@ import { Tabs, Tab, useTheme } from '@mui/material';
 import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge';
 
 const tabData = [
-  { label: '.Net', value: 60 },
-  { label: 'SQL', value: 30 },
-  { label: 'Front End', value: 90 },
+  { label: '.Net', value: 90 },
+  { label: 'SQL', value: 40 },
+  { label: 'Front End', value: 60 },
 ];
 
 export default function TabbedGauge() {
-  const theme = useTheme();
   const [activeTab, setActiveTab] = useState(0);
   const [gaugeValue, setGaugeValue] = useState(tabData[0].value);
 

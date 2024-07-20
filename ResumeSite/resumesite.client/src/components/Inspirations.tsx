@@ -61,11 +61,11 @@ const Inspiration: React.FC = () => {
 
   const images = [Knowledge, Outdoors, Learning, Failure, Space];
   const descriptions = [
-    { text: 'Knowledge', color: theme.palette.mode === 'dark' ? theme.palette.primary.dark : 'Black' },
+    { text: 'Knowledge', color: theme.palette.mode === 'dark' ? theme.palette.primary.dark : 'White' },
     { text: 'Outdoors', color: 'White' },
     { text: 'Learning', color: 'White' },
     { text: 'Failure', color: 'Black' },
-    { text: 'Space', color: theme.palette.mode === 'dark' ? theme.palette.primary.dark : 'Black' }
+    { text: 'Space', color: 'White' }
   ];
 
   return (

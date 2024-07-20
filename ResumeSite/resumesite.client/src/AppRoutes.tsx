@@ -1,4 +1,3 @@
-import FetchData from "./components/FetchData";
 import Home from "./components/Home";
 import Inspiration from "./components/Inspirations";
 import Experience from "./components/Experience";
@@ -14,11 +13,6 @@ const AppRoutes: RouteObject[] = [
     path: '/skills',
     id: 'Skills',
     element: <TabbedGauge />
-  },
-  {
-    path: '/fetch-data',
-    id: 'FetchData',
-    element: <FetchData />
   },
   {
     path: '/inspiration',

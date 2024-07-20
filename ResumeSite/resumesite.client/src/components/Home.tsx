@@ -1,12 +1,12 @@
-import { Typography, Box } from '@mui/material';
+import { Typography, Box, useTheme } from '@mui/material';
 import '../css/custom.css';
 import '/images/test2.jpg'
 const Home = () => {
-
+  const theme = useTheme();
   return (
     <Box
       sx={{
-        backgroundImage: 'url(/images/test2.jpg)',
+        backgroundImage: theme.palette.mode === 'dark' ? 'url(/images/test2.jpg)' : 'url(/images/kari-shea-1SAnrIxw5OY-unsplash.jpg)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         height: '100%', // Use '100vh' to fill the full viewport height

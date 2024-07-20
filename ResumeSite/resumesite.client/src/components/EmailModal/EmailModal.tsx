@@ -1,8 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import {
-  Button, Modal, ModalHeader, ModalBody, ModalFooter,
-  Form, FormGroup, Label, Input,
-} from 'reactstrap';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
 import { toast } from 'react-toastify';
 
 interface Props {
@@ -41,12 +38,11 @@ class EmailModal extends React.Component<Props, State> {
   sendEmail = () => {
     this.props.email(this.state.subject, this.state.body);
     this.toggle();
+    this.displaySuccessMessage();
   };
 
   handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    // This ensures that TypeScript understands the dynamic key access and updating of state.
-    // It's a more type-safe approach to updating state based on input changes.
     this.setState(prevState => ({
       ...prevState,
       [name]: value,
@@ -59,27 +55,39 @@ class EmailModal extends React.Component<Props, State> {
 
   render() {
     return (
-      <div>
-        <Modal isOpen={this.state.isOpen} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
-          <ModalBody>
-            <Form>
-              <FormGroup>
-                <Label for="subject">Email subject</Label>
-                <Input name="subject" value={this.state.subject} onChange={this.handleInputChange} />
-              </FormGroup>
-              <FormGroup>
-                <Label for="body">Body</Label>
-                <Input name="body" type='textarea' onChange={this.handleInputChange} value={this.state.body} />
-              </FormGroup>
-            </Form>
-          </ModalBody>
-          <ModalFooter>
-            <Button color="primary" onClick={this.sendEmail}>Do Something</Button>{' '}
-            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
-          </ModalFooter>
-        </Modal>
-      </div>
+      <Dialog open={this.state.isOpen} onClose={this.toggle} className={this.props.className}>
+        <DialogTitle>Email Me!</DialogTitle>
+        <DialogContent>
+          <TextField
+            margin="dense"
+            id="subject"
+            label="Email Subject"
+            type="text"
+            fullWidth
+            variant="outlined"
+            name="subject"
+            value={this.state.subject}
+            onChange={this.handleInputChange}
+          />
+          <TextField
+            margin="dense"
+            id="body"
+            label="Body"
+            type="text"
+            fullWidth
+            multiline
+            rows={4}
+            variant="outlined"
+            name="body"
+            value={this.state.body}
+            onChange={this.handleInputChange}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={this.sendEmail} color="primary">Send</Button>
+          <Button onClick={this.toggle} color="secondary">Cancel</Button>
+        </DialogActions>
+      </Dialog>
     );
   }
 }

@@ -6,9 +6,9 @@
 
         public const string SendGridKey = "SendGridKey";
 
-        public const string emailTo = "emailTo";
+        public const string emailTo = "EmailTo";
 
-        public const string emailFrom = "emailFrom";
+        public const string emailFrom = "EmailFrom";
 
         public const string Dylan = "Dylan";
 

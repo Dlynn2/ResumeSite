@@ -7,22 +7,21 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AppRoutes from '../AppRoutes';
 import { RouteObject, useNavigate } from 'react-router-dom';
 import MyLogo from './Logo';
+import { ColorModeContext } from '../App';
+import { useTheme } from '@mui/material';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
 
 const pages = AppRoutes.filter((route) => route.id);
-const settings = ['Dark mode'];
-interface NavMenuProps {
-
-  toggleDarkMode: () => void; // Add the toggleDarkMode prop
-
-}
-const NavMenu: React.FC<NavMenuProps> = (props) => {
+const NavMenu: React.FC = () => {
+  const theme = useTheme();
+  const colorMode = React.useContext(ColorModeContext);
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
@@ -44,7 +43,7 @@ const NavMenu: React.FC<NavMenuProps> = (props) => {
   };
 
   const handleCloseUserMenu = () => {
-    props.toggleDarkMode();
+    colorMode.toggleColorMode();
     setAnchorElUser(null);
   };
 
@@ -52,14 +51,7 @@ const NavMenu: React.FC<NavMenuProps> = (props) => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* <SvgIcon>
-        <svg
-  >
-    {
-    }
-    </svg>
-
-          </SvgIcon> */}
+          { }
           <MyLogo sx={{
             display: { xs: 'none', md: 'flex' },
             mr: 1,
@@ -151,7 +143,7 @@ const NavMenu: React.FC<NavMenuProps> = (props) => {
               <Button
                 key={page.id}
                 onClick={() => handleCloseNavMenu(page)}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, color: theme.palette.text.primary, display: 'block' }}
               >
                 {page.id}
               </Button>
@@ -159,9 +151,16 @@ const NavMenu: React.FC<NavMenuProps> = (props) => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+            <Tooltip title={theme.palette.mode === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+              <IconButton
+                onClick={handleCloseUserMenu}
+                sx={{ p: 0 }}
+                aria-label={theme.palette.mode === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+              >
+                {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+                <span style={{ marginLeft: '8px', fontSize: '0.875rem' }}>
+                  {theme.palette.mode === 'dark' ? 'Light Mode' : 'Dark Mode'}
+                </span>
               </IconButton>
             </Tooltip>
             <Menu
@@ -180,11 +179,6 @@ const NavMenu: React.FC<NavMenuProps> = (props) => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
             </Menu>
           </Box>
         </Toolbar>
