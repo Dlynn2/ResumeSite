@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Tabs, Tab, useTheme } from '@mui/material';
+import { Tabs, Tab } from '@mui/material';
 import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge';
 
 const tabData = [
@@ -38,6 +38,9 @@ export default function TabbedGauge() {
   }, [activeTab]); // Trigger animation when activeTab changes
 
   const handleChange = (event: any, newValue: React.SetStateAction<number>) => {
+    if(event){
+      
+    }
     setActiveTab(newValue);
   };
 

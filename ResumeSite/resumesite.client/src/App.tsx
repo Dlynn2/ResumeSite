@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AppRoutes from './AppRoutes';
 import IconBar from './components/IconBar/IconBar';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './css/custom.css';
 import { ThemeProvider } from '@emotion/react';
-import { createTheme, CssBaseline, GlobalStyles } from '@mui/material';
+import { createTheme, CssBaseline } from '@mui/material';
 import { Layout } from './components/Layout';
 
 export const ColorModeContext = React.createContext({ toggleColorMode: () => { } });

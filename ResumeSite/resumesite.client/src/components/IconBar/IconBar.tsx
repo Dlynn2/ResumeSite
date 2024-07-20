@@ -1,22 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import EmailIcon from '@mui/icons-material/Email';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import EmailModal from '../EmailModal/EmailModal';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material';
 
 const IconBar = () => {
     const theme = useTheme();
     const [isEmailPopOpen, setIsEmailPopOpen] = useState(false);
-    // const prefersLightMode = useMediaQuery('(prefers-color-scheme: light)');
-    // const iconColor = prefersLightMode ? 'primary' : 'secondary'; // Assuming 'primary' is a suitable color for light mode
 
     const displaySuccessMessage = () => {
         toast.success('Email sent!');

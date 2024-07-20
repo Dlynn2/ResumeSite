@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { Grid, Typography, Card, CardMedia, CardContent, Box } from '@mui/material';
 import CDCNLogo from '/images/CDCN_Logo.png';
 import ampdLogo from '/images/logo_original.png';

@@ -26,16 +26,7 @@
 	position: relative;
 }
 
-.middle {
-	transition: .5s ease;
-	opacity: 0;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	-ms-transform: translate(-50%, -50%);
-	text-align: center;
-}
+
 
 .overlayContainer:hover .ApodImage {
 	opacity: 0.3;
@@ -45,20 +36,7 @@
 	opacity: 1;
 }
 
-@media screen and (max-device-width: 640px) {
-	.middle {
-		transition: .5s ease;
-		opacity: 0;
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		-ms-transform: translate(-50%, -50%);
-		text-align: center;
-		width: 100%;
-		max-height: 100%;
-	}
-}
+
 
 
 .text {

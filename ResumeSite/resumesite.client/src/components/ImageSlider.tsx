@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import '../css/ImageSlider.css';
 import { Box, Typography, useTheme } from '@mui/material'; // Import useTheme from Material-UI
 
