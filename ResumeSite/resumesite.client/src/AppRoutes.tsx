@@ -1,5 +1,5 @@
 import Home from "./components/Home";
-import Inspiration from "./components/Inspirations";
+import Inspiration from "./components/inspiration/Inspirations";
 import Experience from "./components/Experience";
 import { RouteObject } from 'react-router-dom';
 import TabbedGauge from './components/Gauge';

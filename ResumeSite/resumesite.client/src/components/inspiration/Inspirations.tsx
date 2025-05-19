@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Container, CircularProgress, TextField, Typography, Box, CardMedia, useTheme } from '@mui/material';
-import ImageSlider from './ImageSlider.tsx'; // Assuming ImageSlider is already using Material UI or is a custom component
+import ImageSlider from '../ImageSlider.tsx'; // Assuming ImageSlider is already using Material UI or is a custom component
 import Knowledge from '/images/Knowledge.jpg';
 import Outdoors from '/images/Outdoors.jpg';
 import Space from '/images/Space.jpg';
 import Learning from '/images/Learning.jpg';
 import Failure from '/images/Failure.jpg';
+import styles from './Inspirations.module.scss';
+import { motion } from 'framer-motion';
 
 interface IState {
   APODUrl: string;
@@ -68,42 +70,61 @@ const Inspiration: React.FC = () => {
     { text: 'Space', color: 'White' }
   ];
 
-  return (
-    <Container sx={{ display: 'flex', justifyContent: 'center' }}>
-      <Box>
-        <ImageSlider images={images} descriptions={descriptions} />
-        <Box sx={{ float: 'right' }}>
-          <Typography variant="body1" sx={{ mr: 2 }}>
-            Astronomy picture of the day from NASA!
-          </Typography>
-          <TextField
-            id="date"
-            type="date"
-            defaultValue={getDateAsString(new Date())}
-            onChange={(e) => populateAPOD(new Date(e.target.value))}
-            sx={{ mr: 2 }}
-          />
+  const renderShootingStars = () => {
+    const stars = [];
+    for (let i = 0; i < 20; i++) {
+      stars.push(<Box key={i} className={styles.shooting_star} style={{ top: `${Math.random() * 100}%`, left: `${Math.random() * 100}%` }}></Box>);
+    }
+    return stars;
+  };
 
-          {!state.loading ? (
-            isImage(state.APODUrl) ? (
+  return (
+    <Container className={`${styles.night}`} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 4, position: 'relative' }}>
+      <Box className={styles.rotate} sx={{ position: 'absolute', width: '100%', height: '100%', pointerEvents: 'none' }}>
+        {renderShootingStars()}
+      </Box>
+      <Box sx={{ width: '80%', mb: 4, zIndex: 1 }}>
+        <ImageSlider images={images} descriptions={descriptions} />
+      </Box>
+      <Box sx={{ textAlign: 'center', mb: 4, zIndex: 1 }}>
+        <Typography variant="h5" sx={{ mb: 2, color: 'white' }}>
+          Astronomy picture of the day from NASA!
+        </Typography>
+        <TextField
+          id="date"
+          type="date"
+          defaultValue={getDateAsString(new Date())}
+          onChange={(e) => populateAPOD(new Date(e.target.value))}
+          sx={{ mb: 2, backgroundColor: 'white', borderRadius: 1, color: 'black' }}
+          className='date-picker'
+        />
+      </Box>
+      <Box sx={{ width: '80%', zIndex: 1 }}>
+        {!state.loading ? (
+          isImage(state.APODUrl) ? (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
               <Box sx={{ position: 'relative' }}>
                 <CardMedia
                   component="img"
                   image={state.APODUrl}
                   alt="APOD"
-                  sx={{ width: '100%' }}
+                  sx={{ width: '100%', borderRadius: 2, boxShadow: 3 }}
                 />
-                <Box sx={{ position: 'absolute', bottom: 0, left: 0, width: '100%', backgroundColor: 'rgba(0, 0, 0, 0.5)', color: 'white', padding: '10px' }}>
+                <Box sx={{ position: 'absolute', bottom: 0, left: 0, width: '100%', backgroundColor: 'rgba(0, 0, 0, 0.5)', color: 'white', padding: '10px', borderRadius: '0 0 8px 8px' }}>
                   <Typography variant="body2">{state.APODExplanation}</Typography>
                 </Box>
               </Box>
-            ) : (
-              <iframe title="Title For IFrame" style={{ width: '100%' }} src={state.APODUrl || ''} />
-            )
+            </motion.div>
           ) : (
-            <CircularProgress color="primary" />
-          )}
-        </Box>
+            <Typography variant="body2" sx={{ color: 'white' }}>{state.APODExplanation}</Typography>
+          )
+        ) : (
+          <Typography variant="body2" sx={{ color: 'white' }}>Loading...</Typography>
+        )}
       </Box>
     </Container>
   );

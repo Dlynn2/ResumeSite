@@ -42,17 +42,11 @@ export default defineConfig({
         }
     },
     server: {
-        proxy: {
-            '^/weatherforecast': {
-                target,
-                secure: false
-            },
-            '^/external': { target, secure: false },
-            '/contact': { target: "test", secure: false },
-            '/resume': { target, secure: false },
-            '/email': { target, secure: false },
-            '/blob': { target, secure: false },
-        },
+        proxy: Object.fromEntries(
+            ['/weatherforecast', '/external', '/contact', '/resume', '/email', '/blob'].map(path => [
+                path, { target, secure: false }
+            ])
+        ),
         port: 5173,
         https: {
             key: fs.readFileSync(keyFilePath),
