@@ -67,6 +67,7 @@ export default function TabbedGauge() {
         value={gaugeValue}
         cornerRadius="50%"
         sx={(theme) => ({
+          mt: 20,
           [`& .${gaugeClasses.valueText}`]: {
             fontSize: 40,
           },

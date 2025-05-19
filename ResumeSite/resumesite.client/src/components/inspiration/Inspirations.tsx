@@ -87,7 +87,7 @@ const Inspiration: React.FC = () => {
         <ImageSlider images={images} descriptions={descriptions} />
       </Box>
       <Box sx={{ textAlign: 'center', mb: 4, zIndex: 1 }}>
-        <Typography variant="h5" sx={{ mb: 2, color: 'white' }}>
+        <Typography variant="h5" sx={{ mb: 2, color: theme.palette.text.primary }}>
           Astronomy picture of the day from NASA!
         </Typography>
         <TextField
@@ -95,7 +95,22 @@ const Inspiration: React.FC = () => {
           type="date"
           defaultValue={getDateAsString(new Date())}
           onChange={(e) => populateAPOD(new Date(e.target.value))}
-          sx={{ mb: 2, backgroundColor: 'white', borderRadius: 1, color: 'black' }}
+          sx={{
+            mb: 2,
+            backgroundColor: theme.palette.background.paper,
+            borderRadius: 1,
+            color: theme.palette.text.primary,
+            input: { color: theme.palette.text.primary },
+            '& .MuiInputBase-input': { color: theme.palette.text.primary },
+            // This targets the calendar icon for the date picker
+            '& .MuiSvgIcon-root': {
+              color: theme.palette.text.primary,
+            },
+            // For some browsers, the native date icon is not an SVG, so use filter as fallback
+            '& input[type="date"]::-webkit-calendar-picker-indicator': {
+              filter: theme.palette.mode === 'dark' ? 'invert(1)' : 'none',
+            },
+          }}
           className='date-picker'
         />
       </Box>
@@ -123,7 +138,7 @@ const Inspiration: React.FC = () => {
             <Typography variant="body2" sx={{ color: 'white' }}>{state.APODExplanation}</Typography>
           )
         ) : (
-          <Typography variant="body2" sx={{ color: 'white' }}>Loading...</Typography>
+          <Typography variant="body2" sx={{ color: theme.palette.text.primary }}>Loading...</Typography>
         )}
       </Box>
     </Container>
