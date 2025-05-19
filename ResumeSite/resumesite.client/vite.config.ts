@@ -35,7 +35,11 @@ if (!isCI && (!fs.existsSync(certFilePath) || !fs.existsSync(keyFilePath))) {
 const target = env.ASPNETCORE_HTTPS_PORT ? `https://localhost:${env.ASPNETCORE_HTTPS_PORT}` :
     env.ASPNETCORE_URLS ? env.ASPNETCORE_URLS.split(';')[0] : 'https://localhost:7103';
 
-// https://vitejs.dev/config/
+const useHttps =
+    !isCI &&
+    fs.existsSync(keyFilePath) &&
+    fs.existsSync(certFilePath);
+
 export default defineConfig({
     plugins: [plugin()],
     resolve: {
@@ -50,9 +54,11 @@ export default defineConfig({
             ])
         ),
         port: 5173,
-        https: {
-            key: fs.readFileSync(keyFilePath),
-            cert: fs.readFileSync(certFilePath),
-        }
+        https: useHttps
+            ? {
+                key: fs.readFileSync(keyFilePath),
+                cert: fs.readFileSync(certFilePath),
+            }
+            : undefined
     }
 })
