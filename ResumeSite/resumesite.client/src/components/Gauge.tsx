@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Tabs, Tab } from '@mui/material';
 import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge';
 
@@ -39,6 +39,7 @@ export default function TabbedGauge() {
   }, [activeTab]);
 
   const handleChange = (event: any, newValue: number) => {
+    if(event) {}
     setActiveTab(newValue);
   };
 
