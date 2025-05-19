@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, CircularProgress, TextField, Typography, Box, CardMedia, useTheme } from '@mui/material';
+import { Container, TextField, Typography, Box, CardMedia, useTheme } from '@mui/material';
 import ImageSlider from '../ImageSlider.tsx'; // Assuming ImageSlider is already using Material UI or is a custom component
 import Knowledge from '/images/Knowledge.jpg';
 import Outdoors from '/images/Outdoors.jpg';
