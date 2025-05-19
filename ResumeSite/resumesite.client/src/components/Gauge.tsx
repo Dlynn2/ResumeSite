@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Tabs, Tab } from '@mui/material';
 import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge';
 
@@ -21,48 +21,36 @@ const tabData = [
 export default function TabbedGauge() {
   const [activeTab, setActiveTab] = useState(0);
   const [gaugeValue, setGaugeValue] = useState(tabData[0].value);
+  const animationRef = useRef<number | null>(null);
 
-  const animateGaugeValue = (startValue: number, endValue: number) => {
-    const duration = 800; // Animation duration in milliseconds
-    const startTime = performance.now();
-
-    const animate = (currentTime: number) => {
-        const elapsedTime = currentTime - startTime;
-        const progress = Math.min(elapsedTime / duration, 1); // Ensure progress doesn't exceed 1
-        const valueChange = endValue - startValue;
-        // Round the currentValue to the nearest integer
-        const currentValue = Math.round(startValue + valueChange * progress);
-        setGaugeValue(currentValue);
-      
-        if (progress < 1) {
-          requestAnimationFrame(animate);
-        }
-      };
-
-    requestAnimationFrame(animate);
-  };
+  // Store the previous value for smooth animation
+  const prevValueRef = useRef(tabData[0].value);
 
   useEffect(() => {
     const targetValue = tabData[activeTab].value;
-    animateGaugeValue(gaugeValue, targetValue);
-  }, [activeTab]); // Trigger animation when activeTab changes
+    setGaugeValue(targetValue);
+    prevValueRef.current = targetValue;
+    // Cleanup on unmount
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, [activeTab]);
 
-  const handleChange = (event: any, newValue: React.SetStateAction<number>) => {
-    if(event){
-      
-    }
+  const handleChange = (event: any, newValue: number) => {
     setActiveTab(newValue);
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <Tabs
         value={activeTab}
         onChange={handleChange}
         aria-label="gauge tabs"
-        variant="scrollable" // Enable horizontal scrolling
-        scrollButtons="auto" // Show scroll buttons as needed
-        allowScrollButtonsMobile // Optional: show scroll buttons on mobile
+        variant="scrollable"
+        scrollButtons="auto"
+        allowScrollButtonsMobile
         sx={{
           width: '90vw',
           maxWidth: 1000,

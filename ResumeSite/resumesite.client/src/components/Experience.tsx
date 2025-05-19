@@ -1,5 +1,6 @@
-import { Component } from 'react';
-import { Grid, Typography, Card, CardMedia, CardContent, Box } from '@mui/material';
+import { Component, JSX } from 'react';
+import { Typography, Card, CardMedia, CardContent, Box } from '@mui/material';
+import Grid from '@mui/material/Grid';
 import CDCNLogo from '/images/CDCN_Logo.png';
 import ampdLogo from '/images/logo_original.png';
 import MSULogo from '/images/Montana_State_Bobcats_logo.svg.png';
@@ -18,7 +19,7 @@ class Experience extends Component<Props, State> {
     renderExperienceItem(logo: string, heading: string, description: JSX.Element) {
         return (
             <Grid container spacing={2} alignItems="center">
-                <Grid item xs={12} sm={4}>
+                <Grid size={{ xs: 12, sm: 4 }}>
                     <Card>
                         <CardMedia
                             component="img"
@@ -29,7 +30,7 @@ class Experience extends Component<Props, State> {
                     </Card>
                 </Grid>
 
-                <Grid item xs={12} sm={8}>
+                <Grid size={{ xs: 12, sm: 8 }}>
                     <CardContent>
                         <Typography variant="h5" component="div">
                             {heading}
