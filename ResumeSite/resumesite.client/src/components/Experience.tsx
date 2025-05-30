@@ -1,11 +1,12 @@
 import { Component, JSX } from 'react';
-import { Typography, Card, CardMedia, CardContent, Box } from '@mui/material';
+import { Typography, Card, CardMedia, CardContent, Box, Chip, Stack } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import CDCNLogo from '/images/CDCN_Logo.png';
 import ampdLogo from '/images/logo_original.png';
 import MSULogo from '/images/Montana_State_Bobcats_logo.svg.png';
 import GapFillersLogo from '/images/gap-fillers-flathead-logo.png';
 import FamilyTree from '/images/treeFavicon.ico';
+import { motion } from 'framer-motion';
 interface Props { }
 
 interface State { }
@@ -18,27 +19,34 @@ class Experience extends Component<Props, State> {
 
     renderExperienceItem(logo: string, heading: string, description: JSX.Element) {
         return (
-            <Grid container spacing={2} alignItems="center">
-                <Grid size={{ xs: 12, sm: 4 }}>
-                    <Card>
-                        <CardMedia
-                            component="img"
-                            image={logo}
-                            alt={`Logo for ${heading}`}
-                            sx={{ width: '100%', maxHeight: 150, objectFit: 'contain', padding: 2 }}
-                        />
-                    </Card>
-                </Grid>
+            <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, ease: 'easeOut' }}
+                viewport={{ once: true, amount: 0.2 }}
+            >
+                <Grid container spacing={2} alignItems="center">
+                    <Grid size={{ xs: 12, sm: 4 }}>
+                        <Card sx={{ backgroundColor: 'transparent', backgroundImage: 'none', boxShadow: 'none' }}>
+                            <CardMedia
+                                component="img"
+                                image={logo}
+                                alt={`Logo for ${heading}`}
+                                sx={{ width: '100%', maxHeight: 150, objectFit: 'contain', padding: 2 }}
+                            />
+                        </Card>
+                    </Grid>
 
-                <Grid size={{ xs: 12, sm: 8 }}>
-                    <CardContent>
-                        <Typography variant="h5" component="div">
-                            {heading}
-                        </Typography>
-                        {description}
-                    </CardContent>
+                    <Grid size={{ xs: 12, sm: 8 }}>
+                        <CardContent sx={{ backgroundColor: 'transparent', backgroundImage: 'none' }}>
+                            <Typography variant="h5" component="div">
+                                {heading}
+                            </Typography>
+                            {description}
+                        </CardContent>
+                    </Grid>
                 </Grid>
-            </Grid>
+            </motion.div>
         );
     }
 
@@ -50,36 +58,66 @@ class Experience extends Component<Props, State> {
                 </Typography>
 
                 {this.renderExperienceItem(FamilyTree, 'ChilcoteFamily.com', (
-                    <ul>
-                        <li>Deployed and hosted the site on a DigitalOcean droplet, ensuring high availability and performance.</li>
-                        <li>Implemented responsive design principles to provide an optimal viewing experience across a wide range of devices.</li>
-                        <li>Enhanced site security through the use of best practices in web security, including data encryption and secure authentication methods.</li>
-                        <li>Developed a user-friendly content management system to allow family members to easily update and manage content without technical expertise.</li>
-                        <li>Optimized site performance through efficient database queries and the use of caching mechanisms.</li>
-                        <li>Ensured data privacy by implementing strict access controls and data protection measures, in compliance with relevant regulations.</li>
-                        <li>Added interactive features such as a dynamic family tree visualization to enhance user engagement.</li>
-                        <li>Established a feedback loop with users to collect suggestions and improve the site based on user input.</li>
-                        <li>Leveraged .NET Core for the backend development, providing a robust and scalable framework for server-side logic.</li>
-                        <li>Utilized Angular for the frontend to create a dynamic and responsive user interface, enhancing the overall user experience.</li>
-                        <li>Integrated Entity Framework (EF) for data access, leveraging its ORM capabilities for efficient and secure data manipulation and retrieval.</li>
-                        <li>Implemented CI/CD pipelines using GitHub Actions, automating the build, test, and deployment processes for increased development efficiency and reliability.</li>
-                        {/* Add more list items as needed */}
-                    </ul>
+                    <>
+                        <Stack direction="row" spacing={1}>
+                            <Chip label=".NET" color="primary" />
+                            <Chip label="Angular" color="secondary" />
+                            <Chip label="Entity Framework" />
+                            <Chip label="CI/CD" />
+                        </Stack>
+                        <ul>
+                            <li>Deployed and hosted the site on a DigitalOcean droplet, ensuring high availability and performance.</li>
+                            <li>Implemented responsive design principles to provide an optimal viewing experience across a wide range of devices.</li>
+                            <li>Enhanced site security through the use of best practices in web security, including data encryption and secure authentication methods.</li>
+                            <li>Developed a user-friendly content management system to allow family members to easily update and manage content without technical expertise.</li>
+                            <li>Optimized site performance through efficient database queries and the use of caching mechanisms.</li>
+                            <li>Ensured data privacy by implementing strict access controls and data protection measures, in compliance with relevant regulations.</li>
+                            <li>Added interactive features such as a dynamic family tree visualization to enhance user engagement.</li>
+                            <li>Established a feedback loop with users to collect suggestions and improve the site based on user input.</li>
+                            <li>Leveraged .NET Core for the backend development, providing a robust and scalable framework for server-side logic.</li>
+                            <li>Utilized Angular for the frontend to create a dynamic and responsive user interface, enhancing the overall user experience.</li>
+                            <li>Integrated Entity Framework (EF) for data access, leveraging its ORM capabilities for efficient and secure data manipulation and retrieval.</li>
+                            <li>Implemented CI/CD pipelines using GitHub Actions, automating the build, test, and deployment processes for increased development efficiency and reliability.</li>
+                            <li>Collaborated with family members to gather requirements and feedback, ensuring the site meets the needs of its users.</li>
+                            {/* Add more list items as needed */}
+                        </ul>
+
+                    </>
                 ))}
                 {this.renderExperienceItem(CDCNLogo, 'Consumer Direct Care Network', (
-                    <ul>
-                        <li>Incorporated cybersecurity priorities into development projects to reduce potential liability and increase customer security.</li>
-                        <li>Created long-term development plans to optimize performance within multi-project and multi-team environments.</li>
-                        {/* Add more list items as needed */}
-                    </ul>
+                    <>
+                        <Stack direction="row" spacing={1}>
+                            <Chip label="Security" color="primary" />
+                            <Chip label="Databases" color="secondary" />
+                            <Chip label="Agile" />
+                        </Stack>
+                        <ul>
+                            <li>Incorporated cybersecurity priorities into development projects to reduce potential liability and increase customer security.</li>
+                            <li>Created long-term development plans to optimize performance within multi-project and multi-team environments.</li>
+                            <li>Worked with multiple teams to create a secure and efficient database for the company.</li>
+
+                            {/* Add more list items as needed */}
+                        </ul>
+                    </>
+
                 ))}
 
                 {this.renderExperienceItem(ampdLogo, 'AMPD Engagement', (
                     <>
+                        <Stack direction="row" spacing={1}>
+                            <Chip label="React" color="primary" />
+                            <Chip label="JavaScript" color="secondary" />
+                            <Chip label="MySQL" />
+                            <Chip label="Sequelize" />
+                            <Chip label="Express" />
+                        </Stack>
                         <p>Web App designed for teachers and researchers to collect and visualize data from students in their classes.</p>
                         <ul>
                             <li>Worked with team members to deliver a web application written using React, JavaScript, MySQL, Sequelize (ORM), Express (Server), and other APIs and packages.</li>
                             <li>Created multiple views for different that render without refreshing.</li>
+                            <li>Worked with team members to create a secure and efficient database for the client.</li>
+                            <li>Created a secure and efficient server using Express.</li>
+
                             {/* Add more list items as needed */}
                         </ul>
                     </>
@@ -87,22 +125,36 @@ class Experience extends Component<Props, State> {
 
                 {this.renderExperienceItem(MSULogo, 'Montana State University', (
                     <>
-                        <p>Bachelor's in Computer Science and a Minor in statistics.</p>
+                        <Stack direction="row" spacing={1}>
+                            <Chip label="Computer Science" color="primary" />
+                            <Chip label="Statistics" color="secondary" />
+                            <Chip label="GPA: 3.8" />
+                        </Stack>
+                        <p>Graduated with a Bachelor's in Computer Science and a Minor in Statistics.</p>
                         <ul>
                             <li>Montana State University - Bozeman, MT</li>
                             <li>August 2017 to May 2020</li>
                             <li>GPA: 3.8</li>
+                            <li>Graduated with Honors</li>
+                            <li>Relevant Coursework: Data Structures, Algorithms, Database Management, Web Development, Software Engineering, and Statistics.</li>
+
                         </ul>
                         College was a lot of work and a lot of fun!
                     </>
                 ))}
                 {this.renderExperienceItem(GapFillersLogo, 'Gap FIllers Flathead', (
                     <>
+                        <Stack direction="row" spacing={1}>
+                            <Chip label="HTML5" color="primary" />
+                            <Chip label="CSS" color="secondary" />
+                            <Chip label="JavaScript" />
+                        </Stack>
                         <p>Non-profit that focuses on helping students in need particularly girls in middle school or high school.</p>
                         <ul>
                             <li>Created Website using HTML5, CSS, and JavaScript.</li>
                             <li>Worked CSS so it is Mobile friendly.</li>
                             <li>Maintain server and SEO.</li>
+
                         </ul>
                     </>
                 ))}

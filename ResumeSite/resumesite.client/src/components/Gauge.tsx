@@ -1,24 +1,26 @@
 import { useState, useEffect, useRef } from 'react';
-import { Tabs, Tab } from '@mui/material';
+import { Tabs, Tab, Typography, useTheme } from '@mui/material';
 import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge';
+import { motion } from 'framer-motion';
 
 const tabData = [
-  { label: '.Net', value: 90 },
-  { label: 'Java', value: 60 },
-  { label: 'Python', value: 40 },
-  { label: 'SQL', value: 60 },
-  { label: 'NoSQL', value: 30 },
-  { label: 'Front End', value: 80 },
-  { label: 'JavaScript', value: 60 },
-  { label: 'TypeScript', value: 80 },
-  { label: 'HTML/CSS', value: 60 },
-  { label: 'UX', value: 40 },
-  { label: 'DevOps', value: 50 },
-  { label: 'Cloud', value: 70 },
-  { label: 'AI/ML', value: 40 }
+  { label: '.Net', value: 90, description: "Expert in .NET Core and ASP.NET for building scalable web APIs and enterprise applications." },
+  { label: 'Java', value: 60, description: "Solid experience with Java for backend services, Android apps, and cross-platform solutions." },
+  { label: 'Python', value: 40, description: "Used Python for scripting, automation, and data analysis tasks." },
+  { label: 'SQL', value: 60, description: "Proficient in SQL for designing, querying, and optimizing relational databases." },
+  { label: 'NoSQL', value: 30, description: "Familiar with NoSQL databases like MongoDB for flexible, scalable data storage." },
+  { label: 'Front End', value: 80, description: "Strong front-end skills using React, TypeScript, and modern CSS frameworks." },
+  { label: 'JavaScript', value: 60, description: "Experienced with JavaScript ES6+, building interactive and dynamic web apps." },
+  { label: 'TypeScript', value: 80, description: "Advocate for TypeScript to ensure robust, maintainable codebases." },
+  { label: 'HTML/CSS', value: 60, description: "Skilled in semantic HTML and responsive CSS for accessible, modern UIs." },
+  { label: 'UX', value: 40, description: "Focus on user experience, usability, and intuitive design principles." },
+  { label: 'DevOps', value: 50, description: "Experience with CI/CD pipelines, Docker, and cloud deployments." },
+  { label: 'Cloud', value: 70, description: "Worked with Azure and AWS for deploying and scaling cloud-native apps." },
+  { label: 'AI/ML', value: 40, description: "Exploring AI/ML concepts and applying them to real-world problems." }
 ];
 
 export default function TabbedGauge() {
+  const theme = useTheme();
   const [activeTab, setActiveTab] = useState(0);
   const [gaugeValue, setGaugeValue] = useState(tabData[0].value);
   const animationRef = useRef<number | null>(null);
@@ -39,12 +41,17 @@ export default function TabbedGauge() {
   }, [activeTab]);
 
   const handleChange = (event: any, newValue: number) => {
-    if(event) {}
+    if (event) { }
     setActiveTab(newValue);
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <div style={{
+      minHeight: '100vh',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    }}>
       <Tabs
         value={activeTab}
         onChange={handleChange}
@@ -68,6 +75,7 @@ export default function TabbedGauge() {
         cornerRadius="50%"
         sx={(theme) => ({
           mt: 20,
+          filter: 'drop-shadow(0 0 24px #2196f3)',
           [`& .${gaugeClasses.valueText}`]: {
             fontSize: 40,
           },
@@ -79,6 +87,16 @@ export default function TabbedGauge() {
           },
         })}
       />
+      <motion.div
+        key={activeTab}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+      >
+        <Typography variant="h6" sx={{ mt: 2, color: theme.palette.text.primary }}>
+          {tabData[activeTab].description}
+        </Typography>
+      </motion.div>
     </div>
   );
 }
