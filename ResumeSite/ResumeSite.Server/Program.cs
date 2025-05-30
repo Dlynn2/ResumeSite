@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 var blobConnectionString = builder.Configuration.GetValue<string>("BlobConnectionString");
 builder.Services.AddSingleton(x => new BlobServiceClient(blobConnectionString));
+builder.Services.AddMemoryCache();
 builder.Services.AddControllers();
 builder.Services.AddHttpClient();
 builder.Services.AddHealthChecks();
