@@ -3,6 +3,7 @@ import Inspiration from "./components/inspiration/Inspirations";
 import Experience from "./components/Experience";
 import { RouteObject } from 'react-router-dom';
 import TabbedGauge from './components/Gauge';
+import Analytics from "./components/Analytics/Analytics";
 
 const AppRoutes: RouteObject[] = [
   {
@@ -23,6 +24,11 @@ const AppRoutes: RouteObject[] = [
     path: '/experience',
     id: 'Experience',
     element: <Experience />
+  },
+  {
+    path: '/analytics',
+    id: 'Analytics',
+    element: <Analytics />
   },
 ];
 

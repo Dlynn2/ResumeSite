@@ -1,13 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Container, TextField, Typography, Box, CardMedia, useTheme } from '@mui/material';
-import ImageSlider from '../ImageSlider.tsx'; // Assuming ImageSlider is already using Material UI or is a custom component
-import Knowledge from '/images/Knowledge.jpg';
-import Outdoors from '/images/Outdoors.jpg';
-import Space from '/images/Space.jpg';
-import Learning from '/images/Learning.jpg';
-import Failure from '/images/Failure.jpg';
+import { toast } from 'react-toastify';
 import styles from './Inspirations.module.scss';
 import { motion } from 'framer-motion';
+import { ColorModeContext } from '../../App';
 
 interface IState {
   APODUrl: string;
@@ -17,6 +13,8 @@ interface IState {
 
 const Inspiration: React.FC = () => {
   const theme = useTheme();
+  // const [token, setToken] = useState('');
+  const colorMode = useContext(ColorModeContext);
   const [state, setState] = useState<IState>({
     APODUrl: '',
     APODExplanation: '',
@@ -49,6 +47,12 @@ const Inspiration: React.FC = () => {
     }
   };
 
+  // async function getToken() {
+  //   const response = await fetch('/external/spotifyToken');
+  //   const json = await response.json();
+  //   setToken(json.access_token);
+  // }
+
   const isImage = (url: string): boolean => {
     return /\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
   };
@@ -58,33 +62,71 @@ const Inspiration: React.FC = () => {
   };
 
   useEffect(() => {
+    // getToken();
     populateAPOD(new Date());
-  }, []);
 
-  const images = [Knowledge, Outdoors, Learning, Failure, Space];
-  const descriptions = [
-    { text: 'Knowledge', color: theme.palette.mode === 'dark' ? theme.palette.primary.dark : 'White' },
-    { text: 'Outdoors', color: 'White' },
-    { text: 'Learning', color: 'White' },
-    { text: 'Failure', color: 'Black' },
-    { text: 'Space', color: 'White' }
-  ];
+    if (theme.palette.mode === 'light') {
+      toast.info('Click here to experience the stars at night!', {
+        position: 'bottom-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        toastId: 'dark-mode-recommendation', // prevents duplicate toasts
+        onClick: () => colorMode.toggleColorMode()
+      });
+    }
+  }, [theme.palette.mode]);
 
   const renderShootingStars = () => {
     const stars = [];
     for (let i = 0; i < 20; i++) {
-      stars.push(<Box key={i} className={styles.shooting_star} style={{ top: `${Math.random() * 100}%`, left: `${Math.random() * 100}%` }}></Box>);
+      stars.push(
+        <Box
+          key={i}
+          className={styles.shooting_star}
+          style={{
+            top: `${Math.random() * 100}%`,
+            left: `${Math.random() * 100}%`,
+            animationDelay: `${Math.random() * 10}s`
+          }}
+        />);
     }
     return stars;
   };
 
   return (
-    <Container className={`${styles.night}`} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 4, position: 'relative' }}>
+    <Container
+      className={`${styles.night}`}
+      maxWidth={false}
+      disableGutters
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        m: 0,
+        p: 0,
+        minHeight: '100vh',
+        minWidth: '100vw',
+        position: 'relative',
+        overflow: 'hidden',
+      }}
+    >
+      <iframe
+        style={{ borderRadius: '12px' }}
+        src="https://open.spotify.com/embed/playlist/17mF49LR0vLzpJUa9DbD6z?utm_source=generator"
+        width="80%"
+        height="352"
+        frameBorder="0"
+        allowFullScreen
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy"
+      />
+
       <Box className={styles.rotate} sx={{ position: 'absolute', width: '100%', height: '100%', pointerEvents: 'none' }}>
         {renderShootingStars()}
-      </Box>
-      <Box sx={{ width: '80%', mb: 4, zIndex: 1 }}>
-        <ImageSlider images={images} descriptions={descriptions} />
       </Box>
       <Box sx={{ textAlign: 'center', mb: 4, zIndex: 1 }}>
         <Typography variant="h5" sx={{ mb: 2, color: theme.palette.text.primary }}>
@@ -114,7 +156,7 @@ const Inspiration: React.FC = () => {
           className='date-picker'
         />
       </Box>
-      <Box sx={{ width: '80%', zIndex: 1 }}>
+      <Box sx={{ maxWidth: '80%', maxHeight: 500, zIndex: 1, margin: '0 auto' }}>
         {!state.loading ? (
           isImage(state.APODUrl) ? (
             <motion.div
@@ -127,10 +169,39 @@ const Inspiration: React.FC = () => {
                   component="img"
                   image={state.APODUrl}
                   alt="APOD"
-                  sx={{ width: '100%', borderRadius: 2, boxShadow: 3 }}
+                  sx={{
+                    width: '100%',
+                    maxHeight: 500,
+                    height: 'auto',
+                    borderRadius: 2,
+                    boxShadow: 3,
+                    objectFit: 'contain'
+                  }}
                 />
-                <Box sx={{ position: 'absolute', bottom: 0, left: 0, width: '100%', backgroundColor: 'rgba(0, 0, 0, 0.5)', color: 'white', padding: '10px', borderRadius: '0 0 8px 8px' }}>
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    bottom: 0,
+                    left: 0,
+                    width: '100%',
+                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                    color: 'white',
+                    padding: { xs: '6px', sm: '10px' },
+                    borderRadius: '0 0 8px 8px',
+                    fontSize: { xs: '0.85rem', sm: '1rem' },
+                    maxHeight: { xs: 80, sm: 120 },
+                    overflowY: 'auto',
+                    // Hide overlay on very small screens, show below image instead
+                    display: { xs: 'none', sm: 'block' },
+                  }}
+                >
                   <Typography variant="body2">{state.APODExplanation}</Typography>
+                </Box>
+                {/* Show explanation below image on xs screens */}
+                <Box sx={{ display: { xs: 'block', sm: 'none' }, mt: 1 }}>
+                  <Typography variant="body2" sx={{ color: 'white', background: 'rgba(0,0,0,0.5)', borderRadius: 2, p: 1 }}>
+                    {state.APODExplanation}
+                  </Typography>
                 </Box>
               </Box>
             </motion.div>

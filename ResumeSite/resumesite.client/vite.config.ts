@@ -49,7 +49,7 @@ export default defineConfig({
     },
     server: {
         proxy: Object.fromEntries(
-            ['/weatherforecast', '/external', '/contact', '/resume', '/email', '/blob'].map(path => [
+            ['/weatherforecast', '/external', '/contact', '/resume', '/email', '/blob', '/userInfo'].map(path => [
                 path, { target, secure: false }
             ])
         ),

@@ -12,5 +12,9 @@
 
         public const string Dylan = "Dylan";
 
+        public const string IpStackKey = "IpStackKey";
+
+        public const string WeatherStackKey = "WeatherStackKey";
+
     }
 }

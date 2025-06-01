@@ -1,94 +1,38 @@
-import { useState } from 'react';
-import Tooltip from '@mui/material/Tooltip';
-import IconButton from '@mui/material/IconButton';
+import SpeedDial from '@mui/material/SpeedDial';
+import SpeedDialAction from '@mui/material/SpeedDialAction';
+import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import EmailModal from '../EmailModal/EmailModal';
 import { useTheme } from '@mui/material';
 
+const actions = [
+  { icon: <FacebookIcon />, name: 'Facebook', url: 'https://www.facebook.com/dylan.lynn.56' },
+  { icon: <GitHubIcon />, name: 'GitHub', url: 'https://github.com/Dlynn2' },
+  { icon: <LinkedInIcon />, name: 'LinkedIn', url: 'https://www.linkedin.com/in/dylan-lynn-47b76965/' },
+];
+
 const IconBar = () => {
-    const theme = useTheme();
-    const [isEmailPopOpen, setIsEmailPopOpen] = useState(false);
+  const theme = useTheme();
 
-    const displaySuccessMessage = () => {
-        toast.success('Email sent!');
-    };
-    const displayErrorMessage = () => {
-        toast.error('Email sent!');
-    };
-
-    const email = async (emailSubject: any, emailBody: any) => {
-        try {
-            const requestOptions = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ emailSubject, emailBody }),
-            };
-
-            const response = await fetch('email', requestOptions);
-            const { error } = await response.json();
-
-            if (!error) {
-                displaySuccessMessage();
-            } else {
-                displayErrorMessage(); // Consider showing an error message here instead
-            }
-        } catch (error) {
-            console.error('Error sending email:', error);
-        }
-    };
-
-    const toggleEmailModal = () => {
-        setIsEmailPopOpen(!isEmailPopOpen);
-    };
-
-    return (
-        <div>
-            <ul className="icon-bar">
-                <li>
-                    <Tooltip title="Facebook" placement="right">
-                        <IconButton component="a" href="https://www.facebook.com/dylan.lynn.56" sx={{ color: theme.palette.secondary.main }}>
-                            <FacebookIcon />
-                        </IconButton>
-                    </Tooltip>
-                </li>
-                <li>
-                    <Tooltip title="Github" placement="right">
-                        <IconButton component="a" href="https://github.com/Dlynn2" sx={{ color: theme.palette.secondary.main }}>
-                            <GitHubIcon />
-                        </IconButton>
-                    </Tooltip>
-                </li>
-                {/* <li>
-                    <Tooltip title="Email me!" placement="right">
-                        <IconButton component="a" onClick={toggleEmailModal} sx={{ color: theme.palette.secondary.main }}>
-                            <EmailIcon />
-                        </IconButton>
-                    </Tooltip>
-                </li> */}
-                <li>
-                    <Tooltip title="LinkedIn" placement="right">
-                        <IconButton component="a" href="https://www.linkedin.com/in/dylan-lynn-47b76965/" sx={{ color: theme.palette.secondary.main }}>
-                            <LinkedInIcon />
-                        </IconButton>
-                    </Tooltip>
-                </li>
-                {/* <li>
-                    <Tooltip title="Download my resume." placement="right">
-                        <IconButton component="a" href="https://www.linkedin.com/in/dylan-lynn-47b76965/" sx={{ color: theme.palette.secondary.main }}>
-                            <PictureAsPdfIcon />
-                        </IconButton>
-                    </Tooltip>
-                </li> */}
-            </ul>
-            {isEmailPopOpen && (
-                <EmailModal isOpen={isEmailPopOpen} openClose={toggleEmailModal} email={email} />
-            )}
-        </div>
-    );
+  return (
+    <SpeedDial
+      ariaLabel="Social Links"
+      sx={{ position: 'fixed', bottom: 32, right: 32, zIndex: 2000 }}
+      icon={<SpeedDialIcon />}
+      direction="up"
+    >
+      {actions.map((action) => (
+        <SpeedDialAction
+          key={action.name}
+          icon={action.icon}
+          slotProps={{ tooltip: { title: action.name } }}
+          onClick={() => window.open(action.url, '_blank')}
+          sx={{ color: theme.palette.secondary.main }}
+        />
+      ))}
+    </SpeedDial>
+  );
 };
 
 export default IconBar;

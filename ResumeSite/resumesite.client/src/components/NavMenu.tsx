@@ -19,168 +19,143 @@ import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 
 const pages = AppRoutes.filter((route) => route.id);
+
 const NavMenu: React.FC = () => {
   const theme = useTheme();
   const colorMode = React.useContext(ColorModeContext);
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
 
-  const handleCloseNavMenu = (route: RouteObject) => {
-    if (route.path) {
+  const handleCloseNavMenu = (route?: RouteObject) => {
+    if (route?.path) {
       navigate(route.path);
     }
-    else {
-      setAnchorElNav(null);
-    }
+    setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
+  const handleToggleTheme = () => {
     colorMode.toggleColorMode();
-    setAnchorElUser(null);
   };
 
   return (
-    <AppBar position="static">
+    <AppBar
+      position="fixed"
+      sx={{
+        backgroundColor: theme.palette.mode === 'dark'
+          ? 'rgba(15, 23, 42, 0.95)'
+          : 'rgba(255, 255, 255, 0.95)',
+        backdropFilter: 'blur(8px)',
+        borderBottom: `1px solid ${theme.palette.divider}`,
+        boxShadow: theme.shadows[1],
+      }}
+    >
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          { }
-          <MyLogo sx={{
-            display: { xs: 'none', md: 'flex' },
-            mr: 1,
-            height: '70px', // Adjusted height
-            width: 'auto', // Add this line if you want the width to adjust automatically
-            alignSelf: 'center', // This centers it vertically if the parent is a flex container
-          }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            Dylvelop
-          </Typography>
+        <Toolbar disableGutters sx={{ height: 64, px: 2 }}>
+          {/* Logo & Brand (left, desktop only) */}
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', mr: 2 }}>
+            <MyLogo sx={{ height: 65, width: 65, mr: 1 }} />
+            <Typography
+              variant="h6"
+              component="a"
+              href="/"
+              sx={{
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.2rem',
+                color: theme.palette.text.primary,
+                textDecoration: 'none',
+                '&:hover': { color: theme.palette.primary.main }
+              }}
+            >
+              NorthCode
+            </Typography>
+          </Box>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          {/* Mobile Menu Button */}
+          <Box sx={{ display: { xs: 'flex', md: 'none' }, flexGrow: 1 }}>
             <IconButton
               size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
+              aria-label="open navigation menu"
               onClick={handleOpenNavMenu}
-              color="inherit"
+              sx={{ color: theme.palette.text.primary }}
             >
               <MenuIcon />
             </IconButton>
             <Menu
-              id="menu-appbar"
               anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
               open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
+              onClose={() => setAnchorElNav(null)}
               sx={{
                 display: { xs: 'block', md: 'none' },
+                '& .MuiPaper-root': {
+                  backgroundColor: theme.palette.background.paper,
+                  borderRadius: 2,
+                  mt: 1,
+                }
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page.id} onClick={() => handleCloseNavMenu(page)}>
-                  <Typography textAlign="center">{page.id}</Typography>
+                <MenuItem
+                  key={page.id}
+                  onClick={() => handleCloseNavMenu(page)}
+                >
+                  <Typography textAlign="center" color={theme.palette.text.primary}>
+                    {page.id}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          <MyLogo sx={{
-            display: { xs: 'flex', md: 'none' },
-            mr: 1,
-            height: '70px', // Adjusted height
-            width: 'auto', // Add this line if you want the width to adjust automatically
-            alignSelf: 'center', // This centers it vertically if the parent is a flex container
-          }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            Dylvelop
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+
+          {/* Nav Links (desktop only) */}
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', ml: 3, flexGrow: 1 }}>
             {pages.map((page) => (
               <Button
                 key={page.id}
                 onClick={() => handleCloseNavMenu(page)}
-                sx={{ my: 2, color: theme.palette.text.primary, display: 'block' }}
+                sx={{
+                  mx: 1,
+                  px: 2,
+                  py: 1,
+                  color: theme.palette.text.primary,
+                  fontWeight: 500,
+                  textTransform: 'none',
+                  borderRadius: 2,
+                  '&:hover': {
+                    backgroundColor: theme.palette.action.hover,
+                    color: theme.palette.primary.main,
+                  }
+                }}
               >
                 {page.id}
               </Button>
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title={theme.palette.mode === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+          {/* Theme Toggle (right) */}
+          <Box sx={{ flexGrow: 0, ml: 2 }}>
+            <Tooltip title={`Switch to ${theme.palette.mode === 'dark' ? 'light' : 'dark'} mode`}>
               <IconButton
-                onClick={handleCloseUserMenu}
-                sx={{ p: 0 }}
-                aria-label={theme.palette.mode === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+                onClick={handleToggleTheme}
+                sx={{
+                  color: theme.palette.text.primary,
+                  '&:hover': {
+                    backgroundColor: theme.palette.action.hover,
+                  }
+                }}
               >
                 {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
-                <span style={{ marginLeft: '8px', fontSize: '0.875rem' }}>
-                  {theme.palette.mode === 'dark' ? 'Light Mode' : 'Dark Mode'}
-                </span>
               </IconButton>
             </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-            </Menu>
           </Box>
         </Toolbar>
       </Container>
     </AppBar>
   );
-}
+};
+
 export default NavMenu;

@@ -1,8 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json;
+using ResumeSite.Server.Data;
+using ResumeSite.Server.Data.Models;
 using ResumeSite.Server.DTO;
+using ResumeSite.Server.DTO.ResumeSite.Server.DTO;
 using System.Globalization;
+using UAParser;
 
 namespace ResumeSite.Server.Controllers
 {
@@ -14,11 +18,21 @@ namespace ResumeSite.Server.Controllers
 
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IMemoryCache _cache;
-        public ExternalController(ILogger<ExternalController> logger, IHttpClientFactory httpClientFactory, IMemoryCache cache)
+        private readonly HttpClient _httpClient;
+        private readonly IConfiguration _configuration;
+        private readonly ResumeDbContext _dbContext;
+        public ExternalController(ILogger<ExternalController> logger,
+            IHttpClientFactory httpClientFactory,
+            IMemoryCache cache,
+            IConfiguration configuration,
+            ResumeDbContext context)
         {
             _logger = logger;
             _httpClientFactory = httpClientFactory;
             _cache = cache;
+            _httpClient = _httpClientFactory.CreateClient();
+            _configuration = configuration;
+            _dbContext = context;
         }
 
         [HttpGet]
@@ -31,16 +45,14 @@ namespace ResumeSite.Server.Controllers
             }
             ApodDto? apodDtoResponse = null;
             string url = "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&date=" + apodDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
-            _logger.LogInformation("getting astrology photo of the day for day ");
-            var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get,url){};
-            HttpClient client = _httpClientFactory.CreateClient();
-            var response = await client.SendAsync(httpRequestMessage);
+            var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, url) { };
+            var response = await _httpClient.SendAsync(httpRequestMessage);
             if (response.IsSuccessStatusCode)
             {
                 apodDtoResponse = JsonConvert.DeserializeObject<ApodDto>(await response.Content.ReadAsStringAsync());
                 if (apodDtoResponse != null)
                 {
-                   
+
                     var now = DateTime.Now;
                     var midnight = now.Date.AddDays(1);
                     var cacheEntryOptions = new MemoryCacheEntryOptions
@@ -51,6 +63,139 @@ namespace ResumeSite.Server.Controllers
                 }
             }
             return apodDtoResponse;
+        }
+
+        [HttpGet]
+        [Route("IpInfo")]
+        public async Task<IActionResult> GetIpInfo([FromQuery] string ip)
+        {
+            if (string.IsNullOrWhiteSpace(ip))
+                return BadRequest("IP address is required.");
+
+            var ipInfoTask = GetIpInfoInternal(ip);
+            var weatherInfoTask = GetWeatherInfoInternal(ip);
+
+            await Task.WhenAll(ipInfoTask, weatherInfoTask);
+
+            var ipInfo = ipInfoTask.Result;
+            var weatherInfo = weatherInfoTask.Result;
+            var userAgentString = Request.Headers["User-Agent"].ToString();
+            var uaParser = Parser.GetDefault();
+            ClientInfo clientInfo = uaParser.Parse(userAgentString);
+
+            UserInfo userInfo = new UserInfo
+            {
+                IpAddress = ip,
+                CityName = ipInfo?.City,
+                CountryName = ipInfo?.Country_Name,
+                Weather = weatherInfo?.Current?.Temperature.ToString() ?? "N/A",
+                VistedAt = DateTime.UtcNow,
+                HostName = ipInfo?.Hostname ?? "N/A",
+                UserAgent = Request.Headers["User-Agent"].ToString() ?? "N/A",
+                Browser = $"{clientInfo.UA.Family} {clientInfo.UA.Major}",
+                OperatingSystem = $"{clientInfo.OS.Family} {clientInfo.OS.Major}",
+                DeviceType = clientInfo.Device.Family,
+                RegionName = ipInfo?.Region_Name ?? "N/A"
+            };
+            _dbContext.Add(userInfo);
+            try
+            {
+                await _dbContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error saving user info to database.");
+            }
+            _cache.Remove("analytics");
+            return Ok(new { IpInfo = ipInfo, WeatherInfo = weatherInfo });
+        }
+
+        private async Task<IpInfoDto?> GetIpInfoInternal(string ip)
+        {
+            string? apiKey = _configuration.GetValue<string>(Constants.IpStackKey);
+            string url = $"https://api.ipstack.com/{ip}?access_key={apiKey}";
+
+            var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, url);
+            var response = await _httpClient.SendAsync(httpRequestMessage);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<IpInfoDto>(json);
+            }
+            return null;
+        }
+
+        private async Task<WeatherInfoDto?> GetWeatherInfoInternal(string ip)
+        {
+            string? apiKey = _configuration.GetValue<string>(Constants.WeatherStackKey);
+            string url = $"http://api.weatherstack.com/current?access_key={apiKey}&query={ip}&units=f";
+
+            var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, url);
+            var response = await _httpClient.SendAsync(httpRequestMessage);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<WeatherInfoDto>(json);
+            }
+            return null;
+        }
+
+        //[HttpGet]
+        //[Route("spotifyToken")]
+        //public async Task<IActionResult> GetSpotifyToken()
+        //{
+        //    // Only allow requests from your frontend origin
+        //    var allowedOrigin = _configuration.GetValue<string>("FrontendOrigin");
+        //    var origin = Request.Headers["Origin"].ToString();
+        //    if (string.IsNullOrEmpty(origin) || !string.Equals(origin, allowedOrigin, StringComparison.OrdinalIgnoreCase))
+        //    {
+        //        return Forbid();
+        //    }
+
+
+        //    var clientId = _configuration.GetValue<string>("Spotify:ClientId") ?? "";
+        //    var clientSecret = _configuration.GetValue<string>("Spotify:ClientSecret") ?? "";
+        //    var redirectUri = _configuration.GetValue<string>("Spotify:RedirectUri") ?? "";
+        //    if (string.IsNullOrEmpty(clientId) || string.IsNullOrEmpty(clientSecret) || string.IsNullOrEmpty(redirectUri))
+        //        return StatusCode(500, "Spotify credentials not configured.");
+
+        //    var state = SpotifyAuthHelper.GenerateRandomString(16);
+        //    var query = SpotifyAuthHelper.BuildSpotifyAuthQuery(clientId, redirectUri, state);
+        //    var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, query);
+        //    var code = await _httpClient.SendAsync(httpRequestMessage);
+            
+
+        //    var tokenUrl = "https://accounts.spotify.com/api/token";
+        //    var form = new Dictionary<string, string>
+        //    {
+        //        { "code", await code.Content.ReadAsStringAsync() },
+        //        { "redirect_uri", redirectUri },
+        //        { "grant_type", "authorization_code" }
+        //    };
+
+        //    var authHeader = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes($"{clientId}:{clientSecret}"));
+        //    var httpRequest = new HttpRequestMessage(HttpMethod.Post, tokenUrl)
+        //    {
+        //        Content = new FormUrlEncodedContent(form)
+        //    };
+        //    httpRequest.Headers.Add("Authorization", $"Basic {authHeader}");
+
+        //    var response = await _httpClient.SendAsync(httpRequest);
+        //    var content = await response.Content.ReadAsStringAsync();
+
+        //    if (!response.IsSuccessStatusCode)
+        //        return StatusCode((int)response.StatusCode, content);
+
+        //    // Optionally, you can deserialize and return only the access_token
+        //    return Content(content, "application/json");
+        //}
+
+        // DTO for request body
+        public class SpotifyAuthRequest
+        {
+            public string Code { get; set; }
         }
     }
 }

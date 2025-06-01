@@ -17,14 +17,18 @@ export class Layout extends Component<LayoutProps> {
   render() {
     return (
       <>
-        <NavMenu/>
-        <Container sx={{
-          height: '100%', // Make the Container fill 100% of the parent's height
-          width: '100%', // Make the Container fill 100% of the parent's width
-          display: 'flex', // Use flex layout to allow children to fill the container
-          flexDirection: 'column', // Stack children vertically
-          padding: 0, // Remove padding to allow children to fill the container
-        }}
+        <NavMenu />
+        <Container
+          maxWidth={false}
+          disableGutters
+          sx={{
+            minHeight: 'calc(100vh - 75px)', // Use calc to subtract navbar height
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            padding: 0,
+            pt: { xs: '56px', sm: '75px' },
+          }}
         >
           {this.props.children}
         </Container>
