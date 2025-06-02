@@ -6,6 +6,7 @@ import ampdLogo from '/images/logo_original.png';
 import MSULogo from '/images/Montana_State_Bobcats_logo.svg.png';
 import GapFillersLogo from '/images/gap-fillers-flathead-logo.png';
 import FamilyTree from '/images/treeFavicon.ico';
+import NewLogo from '/images/LogoNewGold.png';
 import { motion } from 'framer-motion';
 interface Props { }
 
@@ -62,6 +63,7 @@ class Experience extends Component<Props, State> {
                         <Stack direction="row" spacing={1}>
                             <Chip label=".NET" color="primary" />
                             <Chip label="Angular" color="secondary" />
+                            <Chip label="AWS" />
                             <Chip label="Entity Framework" />
                             <Chip label="CI/CD" />
                         </Stack>
@@ -82,6 +84,33 @@ class Experience extends Component<Props, State> {
                             {/* Add more list items as needed */}
                         </ul>
 
+                    </>
+                ))}
+                {this.renderExperienceItem(NewLogo, 'Resume Site', (
+                    <>
+                        <Stack direction="row" spacing={1}>
+                            <Chip label="React" color="primary" />
+                            <Chip label=".NET" color="secondary" />
+                            <Chip label="Azure" />
+                            <Chip label="Serverless" />
+                            <Chip label="APIs" />
+                        </Stack>
+                        <ul>
+                            <li>Developed a modern, responsive resume site using React for the frontend and .NET for the backend.</li>
+                            <li>Deployed the application using Azure App Service, leveraging Microsoft’s cloud platform for reliable, scalable hosting.</li>
+                            <li>Implemented a serverless Azure database to efficiently store and retrieve site analytics data at no cost.</li>
+                            <li>Integrated three third-party APIs:
+                                <ul>
+                                    <li>IP Geolocation API for visitor analytics and region tracking.</li>
+                                    <li>Weather API to retrieve real-time weather information. (more analytics)</li>
+                                    <li>NASA Astronomy Picture of the Day API for daily space imagery and facts.</li>
+                                </ul>
+                            </li>
+                            <li>Utilized caching strategies for images and data to improve site performance and reduce redundant API calls.</li>
+                            <li>All infrastructure and services are hosted for free using Azure’s free tier offerings.</li>
+                            <li>Designed and built a custom analytics dashboard to visualize visitor data and site usage trends.</li>
+                            <li>Focused on cost-effective, scalable, and maintainable architecture using modern web technologies.</li>
+                        </ul>
                     </>
                 ))}
                 {this.renderExperienceItem(CDCNLogo, 'Consumer Direct Care Network', (

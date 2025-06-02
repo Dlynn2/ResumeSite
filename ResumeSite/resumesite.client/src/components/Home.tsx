@@ -1,13 +1,13 @@
 import { Typography, Box, Button, Stack, useTheme, Avatar } from '@mui/material';
 import { motion } from 'framer-motion';
-
+import backgroundImage from '../../public/images/background.png'; // Adjust the path as necessary
 const Home = () => {
   const theme = useTheme();
 
   return (
     <Box
       sx={{
-        minHeight: '100vh',
+        minHeight: 'calc(100vh - 64px)',
         width: '100vw',
         position: 'relative',
         display: 'flex',
@@ -17,7 +17,7 @@ const Home = () => {
         p: 0,
         zIndex: 0,
         overflow: 'hidden',
-        background: theme.palette.background.default,
+        backgroundImage: `url(${backgroundImage})`,
       }}
     >
       {/* Glassmorphism Card */}
@@ -41,7 +41,7 @@ const Home = () => {
       >
         <Avatar
           alt="Dylan Lynn"
-          src="/profile.jpg" // Replace with your image path or remove if not needed
+          src="/images/profileAvatar.png"
           sx={{
             width: 96,
             height: 96,

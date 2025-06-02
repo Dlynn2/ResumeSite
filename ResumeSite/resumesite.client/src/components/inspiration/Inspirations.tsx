@@ -88,9 +88,9 @@ const Inspiration: React.FC = () => {
           key={i}
           className={styles.shooting_star}
           style={{
-            top: `${Math.random() * 100}%`,
+            top: `${Math.random() * 90}%`,
             left: `${Math.random() * 100}%`,
-            animationDelay: `${Math.random() * 10}s`
+            animationDelay: `${Math.random() * 20}s`
           }}
         />);
     }
@@ -99,23 +99,17 @@ const Inspiration: React.FC = () => {
 
   return (
     <Container
-      className={`${styles.night}`}
-      maxWidth={false}
-      disableGutters
       sx={{
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        m: 0,
-        p: 0,
-        minHeight: '100vh',
-        minWidth: '100vw',
+        width: '100%',
         position: 'relative',
-        overflow: 'hidden',
       }}
     >
+
       <iframe
-        style={{ borderRadius: '12px' }}
+        style={{ borderRadius: '12px', marginTop: '16px', marginBottom: '16px' }}
         src="https://open.spotify.com/embed/playlist/17mF49LR0vLzpJUa9DbD6z?utm_source=generator"
         width="80%"
         height="352"
@@ -125,7 +119,7 @@ const Inspiration: React.FC = () => {
         loading="lazy"
       />
 
-      <Box className={styles.rotate} sx={{ position: 'absolute', width: '100%', height: '100%', pointerEvents: 'none' }}>
+      <Box className={styles.rotate} sx={{ position: 'absolute', width: '100%', height: 'calc(100vh - 64px)', pointerEvents: 'none', left:'-10%' }}>
         {renderShootingStars()}
       </Box>
       <Box sx={{ textAlign: 'center', mb: 4, zIndex: 1 }}>
@@ -156,7 +150,7 @@ const Inspiration: React.FC = () => {
           className='date-picker'
         />
       </Box>
-      <Box sx={{ maxWidth: '80%', maxHeight: 500, zIndex: 1, margin: '0 auto' }}>
+      <Box sx={{ width: '100%', maxWidth: 600, mx: 'auto', zIndex: 1, marginBottom: '64px' }}>
         {!state.loading ? (
           isImage(state.APODUrl) ? (
             <motion.div

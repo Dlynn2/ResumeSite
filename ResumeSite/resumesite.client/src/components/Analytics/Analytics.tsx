@@ -4,24 +4,43 @@ import { AnalyticsModel } from '../../Models/Analytics';
 import { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import CircularProgress from '@mui/material/CircularProgress';
+import Typography from '@mui/material/Typography';
 
 
 function Analytics() {
   const [analyticsData, setAnalyticsData] = useState<AnalyticsModel | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetch('/userInfo')
-      .then(res => res.json())
-      .then(data => setAnalyticsData(data))
-      .catch(err => console.error('Failed to fetch analytics data:', err));
+      .then(res => {
+        if (!res.ok) throw new Error('Failed to fetch analytics data');
+        return res.json();
+      })
+      .then(data => {
+        setAnalyticsData(data);
+        setError(null);
+      })
+      .catch(err => {
+        setError('Unable to load analytics data. Please try again later.');
+        console.error('Failed to fetch analytics data:', err);
+      });
   }, []);
+
+  if (error) {
+    return (
+      <Grid container justifyContent="center" alignItems="center" style={{ minHeight: 200 }}>
+        <Typography color="error">{error}</Typography>
+      </Grid>
+    );
+  }
 
   if (!analyticsData) {
     return (
-    <Grid container justifyContent="center" alignItems="center" style={{ minHeight: 200 }}>
-      <CircularProgress />
-    </Grid>
-  );
+      <Grid container justifyContent="center" alignItems="center" style={{ minHeight: 200 }}>
+        <CircularProgress />
+      </Grid>
+    );
   }
 
 
