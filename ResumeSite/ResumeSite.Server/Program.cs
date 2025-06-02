@@ -9,12 +9,9 @@ var connection = String.Empty;
 if (builder.Environment.IsDevelopment())
 {
     builder.Configuration.AddEnvironmentVariables().AddJsonFile("appsettings.Development.json");
-    connection = builder.Configuration.GetConnectionString("RESUMESITECONNECTIONSTRING");
 }
-else
-{
-    connection = Environment.GetEnvironmentVariable("RESUMESITECONNECTIONSTRING");
-}
+connection = builder.Configuration.GetConnectionString("RESUMESITECONNECTIONSTRING");
+
 builder.Services.AddDbContext<ResumeDbContext>(options => options.UseSqlServer(connection, sqlOptions =>
 {
     sqlOptions.CommandTimeout(120);
