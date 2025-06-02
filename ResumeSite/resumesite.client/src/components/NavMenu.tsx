@@ -55,8 +55,7 @@ const NavMenu: React.FC = () => {
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ height: 64, px: 2 }}>
-          {/* Logo & Brand (left, desktop only) */}
-          <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', mr: 2 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', mr: 2 }}>
             <MyLogo sx={{ height: 65, width: 65, mr: 1 }} />
             <Typography
               variant="h6"

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Container, TextField, Typography, Box, CardMedia, useTheme } from '@mui/material';
+import { Container, TextField, Typography, Box, CardMedia, useTheme, CircularProgress, Grid } from '@mui/material';
 import { toast } from 'react-toastify';
 import styles from './Inspirations.module.scss';
 import { motion } from 'framer-motion';
@@ -209,7 +209,9 @@ const Inspiration: React.FC = () => {
             <Typography variant="body2" sx={{ color: 'white' }}>{state.APODExplanation}</Typography>
           )
         ) : (
-          <Typography variant="body2" sx={{ color: theme.palette.text.primary }}>Loading...</Typography>
+          <Grid container justifyContent="center" alignItems="center" style={{ minHeight: 200 }}>
+            <CircularProgress />
+          </Grid>
         )}
       </Box>
     </Container>

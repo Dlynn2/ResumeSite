@@ -3,6 +3,7 @@ import AnalyticsPieChart from './AnalyticsPieChart';
 import { AnalyticsModel } from '../../Models/Analytics';
 import { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 function Analytics() {
@@ -16,7 +17,11 @@ function Analytics() {
   }, []);
 
   if (!analyticsData) {
-    return <div>Loading analytics...</div>;
+    return (
+    <Grid container justifyContent="center" alignItems="center" style={{ minHeight: 200 }}>
+      <CircularProgress />
+    </Grid>
+  );
   }
 
 
