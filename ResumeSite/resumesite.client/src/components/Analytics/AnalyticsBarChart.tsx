@@ -41,9 +41,11 @@ export default function AnalyticsBarChart({ visitorData }: AnalyticsBarChartProp
             <Typography variant="h4" component="p">
               {visitorData.reduce((sum, d) => sum + d.count, 0).toLocaleString()}
             </Typography>
-            <Chip size="small"
+            <Chip
+              size="small"
               color={growth > 0 ? 'success' : growth < 0 ? 'error' : 'default'}
-              label={growthLabel} />
+              label={growthLabel}
+            />
           </Stack>
           <Typography variant="caption" sx={{ color: 'text.secondary' }}>
             Page views for the last 6 months
@@ -56,14 +58,14 @@ export default function AnalyticsBarChart({ visitorData }: AnalyticsBarChartProp
             {
               scaleType: 'band',
               categoryGapRatio: 0.5,
-              data: visitorData.map(d => d.month),
+              data: visitorData.map((d) => d.month),
             },
           ]}
           series={[
             {
               id: 'page-views',
               label: 'Page views',
-              data: visitorData.map(d => d.count),
+              data: visitorData.map((d) => d.count),
               stack: 'A',
             },
           ]}

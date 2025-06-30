@@ -6,22 +6,23 @@ import Grid from '@mui/material/Grid';
 import CircularProgress from '@mui/material/CircularProgress';
 import Typography from '@mui/material/Typography';
 
-
 function Analytics() {
   const [analyticsData, setAnalyticsData] = useState<AnalyticsModel | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetch('/userInfo')
-      .then(res => {
-        if (!res.ok) throw new Error('Failed to fetch analytics data');
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('Failed to fetch analytics data');
+        }
         return res.json();
       })
-      .then(data => {
+      .then((data) => {
         setAnalyticsData(data);
         setError(null);
       })
-      .catch(err => {
+      .catch((err) => {
         setError('Unable to load analytics data. Please try again later.');
         console.error('Failed to fetch analytics data:', err);
       });
@@ -43,7 +44,6 @@ function Analytics() {
     );
   }
 
-
   return (
     <>
       <Grid container spacing={3}>
@@ -53,7 +53,7 @@ function Analytics() {
         <Grid size={{ xs: 12, md: 6, lg: 3 }}>
           <AnalyticsPieChart
             title="Visitors By Browser"
-            data={analyticsData.visitorsPerBrowsers.map(b => ({
+            data={analyticsData.visitorsPerBrowsers.map((b) => ({
               label: b.browser,
               value: b.count,
             }))}
@@ -62,7 +62,7 @@ function Analytics() {
         <Grid size={{ xs: 12, md: 6, lg: 3 }}>
           <AnalyticsPieChart
             title="Visitors By Operating System"
-            data={analyticsData.visitorsPerOperatingSystems.map(os => ({
+            data={analyticsData.visitorsPerOperatingSystems.map((os) => ({
               label: os.operatingSystem,
               value: os.count,
             }))}
@@ -71,7 +71,7 @@ function Analytics() {
         <Grid size={{ xs: 12, md: 6, lg: 3 }}>
           <AnalyticsPieChart
             title="Visitors By Device Type"
-            data={analyticsData.visitorsPerDeviceTypes.map(dt => ({
+            data={analyticsData.visitorsPerDeviceTypes.map((dt) => ({
               label: dt.deviceType,
               value: dt.count,
             }))}
@@ -80,7 +80,7 @@ function Analytics() {
         <Grid size={{ xs: 12, md: 6, lg: 3 }}>
           <AnalyticsPieChart
             title="Visitors By Region"
-            data={analyticsData.visitorsPerRegions.map(r => ({
+            data={analyticsData.visitorsPerRegions.map((r) => ({
               label: r.regionName,
               value: r.count,
             }))}

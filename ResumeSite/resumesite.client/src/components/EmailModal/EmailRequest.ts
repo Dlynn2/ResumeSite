@@ -1,8 +1,7 @@
-export class EmailRequest
-    {
-        public EmailFrom: string | undefined;
+export class EmailRequest {
+  public EmailFrom: string | undefined;
 
-        public EmailSubject: string | undefined;
+  public EmailSubject: string | undefined;
 
-        public EmailBody: string | undefined;
-    }
+  public EmailBody: string | undefined;
+}

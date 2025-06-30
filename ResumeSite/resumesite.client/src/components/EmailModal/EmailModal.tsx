@@ -1,5 +1,12 @@
 import React, { ChangeEvent } from 'react';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  TextField,
+} from '@mui/material';
 import { toast } from 'react-toastify';
 
 interface Props {
@@ -20,8 +27,8 @@ class EmailModal extends React.Component<Props, State> {
     super(props);
     this.state = {
       isOpen: props.isOpen,
-      subject: "",
-      body: "",
+      subject: '',
+      body: '',
     };
 
     this.toggle = this.toggle.bind(this);
@@ -30,7 +37,7 @@ class EmailModal extends React.Component<Props, State> {
 
   toggle() {
     this.setState({
-      isOpen: !this.state.isOpen
+      isOpen: !this.state.isOpen,
     });
     this.props.openClose();
   }
@@ -43,11 +50,11 @@ class EmailModal extends React.Component<Props, State> {
 
   handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       ...prevState,
       [name]: value,
     }));
-  }
+  };
 
   displaySuccessMessage = () => {
     toast.success('Email sent');
@@ -84,8 +91,12 @@ class EmailModal extends React.Component<Props, State> {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={this.sendEmail} color="primary">Send</Button>
-          <Button onClick={this.toggle} color="secondary">Cancel</Button>
+          <Button onClick={this.sendEmail} color="primary">
+            Send
+          </Button>
+          <Button onClick={this.toggle} color="secondary">
+            Cancel
+          </Button>
         </DialogActions>
       </Dialog>
     );

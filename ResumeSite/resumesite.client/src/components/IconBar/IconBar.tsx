@@ -9,7 +9,11 @@ import { useTheme } from '@mui/material';
 const actions = [
   { icon: <FacebookIcon />, name: 'Facebook', url: 'https://www.facebook.com/dylan.lynn.56' },
   { icon: <GitHubIcon />, name: 'GitHub', url: 'https://github.com/Dlynn2' },
-  { icon: <LinkedInIcon />, name: 'LinkedIn', url: 'https://www.linkedin.com/in/dylan-lynn-47b76965/' },
+  {
+    icon: <LinkedInIcon />,
+    name: 'LinkedIn',
+    url: 'https://www.linkedin.com/in/dylan-lynn-47b76965/',
+  },
 ];
 
 const IconBar = () => {

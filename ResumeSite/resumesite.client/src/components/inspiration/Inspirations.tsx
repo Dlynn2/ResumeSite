@@ -1,5 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Container, TextField, Typography, Box, CardMedia, useTheme, CircularProgress, Grid } from '@mui/material';
+import {
+  Container,
+  TextField,
+  Typography,
+  Box,
+  CardMedia,
+  useTheme,
+  CircularProgress,
+  Grid,
+} from '@mui/material';
 import { toast } from 'react-toastify';
 import styles from './Inspirations.module.scss';
 import { motion } from 'framer-motion';
@@ -18,7 +27,7 @@ const Inspiration: React.FC = () => {
   const [state, setState] = useState<IState>({
     APODUrl: '',
     APODExplanation: '',
-    loading: true
+    loading: true,
   });
 
   const populateAPOD = async (selectedDate: Date | null): Promise<string> => {
@@ -75,7 +84,7 @@ const Inspiration: React.FC = () => {
         draggable: true,
         progress: undefined,
         toastId: 'dark-mode-recommendation', // prevents duplicate toasts
-        onClick: () => colorMode.toggleColorMode()
+        onClick: () => colorMode.toggleColorMode(),
       });
     }
   }, [theme.palette.mode]);
@@ -88,11 +97,12 @@ const Inspiration: React.FC = () => {
           key={i}
           className={styles.shooting_star}
           style={{
-            top: `${Math.random() * 90}%`,
+            top: `${5 + Math.random() * 90}%`, // Avoid 0% and 100%
             left: `${Math.random() * 100}%`,
-            animationDelay: `${Math.random() * 20}s`
+            animationDelay: `${Math.random() * 20}s`,
           }}
-        />);
+        />
+      );
     }
     return stars;
   };
@@ -107,8 +117,8 @@ const Inspiration: React.FC = () => {
         position: 'relative',
       }}
     >
-
       <iframe
+        title="Spotify Playlist"
         style={{ borderRadius: '12px', marginTop: '16px', marginBottom: '16px' }}
         src="https://open.spotify.com/embed/playlist/17mF49LR0vLzpJUa9DbD6z?utm_source=generator"
         width="80%"
@@ -119,7 +129,19 @@ const Inspiration: React.FC = () => {
         loading="lazy"
       />
 
-      <Box className={styles.rotate} sx={{ position: 'absolute', width: '100%', height: 'calc(100vh - 64px)', pointerEvents: 'none', left:'-10%' }}>
+      <Box
+        className={styles.rotate}
+        sx={{
+          position: 'absolute',
+          width: '100%',
+          height: 'calc(100vh - 64px)',
+          pointerEvents: 'none',
+          left: '-10%',
+          top: 0,
+          overflow: 'hidden', // Prevent scrollbars
+          zIndex: 0,
+        }}
+      >
         {renderShootingStars()}
       </Box>
       <Box sx={{ textAlign: 'center', mb: 4, zIndex: 1 }}>
@@ -147,7 +169,7 @@ const Inspiration: React.FC = () => {
               filter: theme.palette.mode === 'dark' ? 'invert(1)' : 'none',
             },
           }}
-          className='date-picker'
+          className="date-picker"
         />
       </Box>
       <Box sx={{ width: '100%', maxWidth: 600, mx: 'auto', zIndex: 1, marginBottom: '64px' }}>
@@ -169,7 +191,7 @@ const Inspiration: React.FC = () => {
                     height: 'auto',
                     borderRadius: 2,
                     boxShadow: 3,
-                    objectFit: 'contain'
+                    objectFit: 'contain',
                   }}
                 />
                 <Box
@@ -193,14 +215,19 @@ const Inspiration: React.FC = () => {
                 </Box>
                 {/* Show explanation below image on xs screens */}
                 <Box sx={{ display: { xs: 'block', sm: 'none' }, mt: 1 }}>
-                  <Typography variant="body2" sx={{ color: 'white', background: 'rgba(0,0,0,0.5)', borderRadius: 2, p: 1 }}>
+                  <Typography
+                    variant="body2"
+                    sx={{ color: 'white', background: 'rgba(0,0,0,0.5)', borderRadius: 2, p: 1 }}
+                  >
                     {state.APODExplanation}
                   </Typography>
                 </Box>
               </Box>
             </motion.div>
           ) : (
-            <Typography variant="body2" sx={{ color: 'white' }}>{state.APODExplanation}</Typography>
+            <Typography variant="body2" sx={{ color: 'white' }}>
+              {state.APODExplanation}
+            </Typography>
           )
         ) : (
           <Grid container justifyContent="center" alignItems="center" style={{ minHeight: 200 }}>

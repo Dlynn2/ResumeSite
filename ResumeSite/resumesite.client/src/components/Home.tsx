@@ -27,9 +27,8 @@ const Home = () => {
         transition={{ duration: 1 }}
         style={{
           textAlign: 'center',
-          background: theme.palette.mode === 'dark'
-            ? 'rgba(30,30,40,0.7)'
-            : 'rgba(255,255,255,0.7)',
+          background:
+            theme.palette.mode === 'dark' ? 'rgba(30,30,40,0.7)' : 'rgba(255,255,255,0.7)',
           borderRadius: 16,
           padding: 36,
           boxShadow: theme.shadows[4],
@@ -82,7 +81,12 @@ const Home = () => {
           Building modern, scalable web applications with passion and precision.
         </Typography>
         <Stack direction="row" spacing={2} justifyContent="center" mb={2}>
-          <Button variant="contained" color="primary" href="public\Resume\ResumeSiteResume.pdf" target="_blank">
+          <Button
+            variant="contained"
+            color="primary"
+            href="/Resume/ResumeSiteResume.pdf"
+            target="_blank"
+          >
             View Resume
           </Button>
           <Button variant="outlined" color="secondary" href="mailto:Dlynn237@gmail.com">
@@ -90,7 +94,6 @@ const Home = () => {
           </Button>
         </Stack>
       </motion.div>
-      
     </Box>
   );
 };

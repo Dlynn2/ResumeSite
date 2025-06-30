@@ -45,9 +45,8 @@ const NavMenu: React.FC = () => {
     <AppBar
       position="fixed"
       sx={{
-        backgroundColor: theme.palette.mode === 'dark'
-          ? 'rgba(15, 23, 42, 0.95)'
-          : 'rgba(255, 255, 255, 0.95)',
+        backgroundColor:
+          theme.palette.mode === 'dark' ? 'rgba(15, 23, 42, 0.95)' : 'rgba(255, 255, 255, 0.95)',
         backdropFilter: 'blur(8px)',
         borderBottom: `1px solid ${theme.palette.divider}`,
         boxShadow: theme.shadows[1],
@@ -67,7 +66,7 @@ const NavMenu: React.FC = () => {
                 letterSpacing: '.2rem',
                 color: theme.palette.text.primary,
                 textDecoration: 'none',
-                '&:hover': { color: theme.palette.primary.main }
+                '&:hover': { color: theme.palette.primary.main },
               }}
             >
               NorthCode
@@ -94,14 +93,11 @@ const NavMenu: React.FC = () => {
                   backgroundColor: theme.palette.background.paper,
                   borderRadius: 2,
                   mt: 1,
-                }
+                },
               }}
             >
               {pages.map((page) => (
-                <MenuItem
-                  key={page.id}
-                  onClick={() => handleCloseNavMenu(page)}
-                >
+                <MenuItem key={page.id} onClick={() => handleCloseNavMenu(page)}>
                   <Typography textAlign="center" color={theme.palette.text.primary}>
                     {page.id}
                   </Typography>
@@ -111,7 +107,9 @@ const NavMenu: React.FC = () => {
           </Box>
 
           {/* Nav Links (desktop only) */}
-          <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', ml: 3, flexGrow: 1 }}>
+          <Box
+            sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', ml: 3, flexGrow: 1 }}
+          >
             {pages.map((page) => (
               <Button
                 key={page.id}
@@ -127,7 +125,7 @@ const NavMenu: React.FC = () => {
                   '&:hover': {
                     backgroundColor: theme.palette.action.hover,
                     color: theme.palette.primary.main,
-                  }
+                  },
                 }}
               >
                 {page.id}
@@ -144,7 +142,7 @@ const NavMenu: React.FC = () => {
                   color: theme.palette.text.primary,
                   '&:hover': {
                     backgroundColor: theme.palette.action.hover,
-                  }
+                  },
                 }}
               >
                 {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}

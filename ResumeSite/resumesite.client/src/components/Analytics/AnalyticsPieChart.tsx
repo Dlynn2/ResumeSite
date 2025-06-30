@@ -1,4 +1,3 @@
-
 import { PieChart } from '@mui/x-charts/PieChart';
 import { useDrawingArea } from '@mui/x-charts/hooks';
 import { styled } from '@mui/material/styles';
@@ -29,7 +28,13 @@ const StyledText = styled('text', {
   fontWeight: theme.typography.body2.fontWeight,
 }));
 
-function PieCenterLabel({ primaryText, secondaryText }: { primaryText: string; secondaryText: string }) {
+function PieCenterLabel({
+  primaryText,
+  secondaryText,
+}: {
+  primaryText: string;
+  secondaryText: string;
+}) {
   const { width, height, left, top } = useDrawingArea();
   const primaryY = top + height / 2 - 10;
   const secondaryY = primaryY + 24;
@@ -54,11 +59,17 @@ const colors = [
   // add more if needed
 ];
 
-export default function AnalyticsPieChart({ data, title = 'Users by category' }: AnalyticsPieChartProps) {
+export default function AnalyticsPieChart({
+  data,
+  title = 'Users by category',
+}: AnalyticsPieChartProps) {
   const total = data.reduce((sum, d) => sum + d.value, 0);
 
   return (
-    <Card variant="outlined" sx={{ display: 'flex', flexDirection: 'column', gap: '8px', flexGrow: 1 }}>
+    <Card
+      variant="outlined"
+      sx={{ display: 'flex', flexDirection: 'column', gap: '8px', flexGrow: 1 }}
+    >
       <CardContent>
         <Typography component="h2" variant="subtitle2">
           {title}

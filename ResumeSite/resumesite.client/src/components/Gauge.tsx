@@ -4,19 +4,73 @@ import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge';
 import { motion } from 'framer-motion';
 
 const tabData = [
-  { label: '.Net', value: 90, description: "Expert in .NET Core and ASP.NET for building scalable web APIs and enterprise applications." },
-  { label: 'Java', value: 60, description: "Solid experience with Java for backend services, Android apps, and cross-platform solutions." },
-  { label: 'Python', value: 40, description: "Used Python for scripting, automation, and data analysis tasks." },
-  { label: 'SQL', value: 60, description: "Proficient in SQL for designing, querying, and optimizing relational databases." },
-  { label: 'NoSQL', value: 30, description: "Familiar with NoSQL databases like MongoDB for flexible, scalable data storage." },
-  { label: 'Front End', value: 80, description: "Strong front-end skills using React, TypeScript, and modern CSS frameworks." },
-  { label: 'JavaScript', value: 60, description: "Experienced with JavaScript ES6+, building interactive and dynamic web apps." },
-  { label: 'TypeScript', value: 80, description: "Advocate for TypeScript to ensure robust, maintainable codebases." },
-  { label: 'HTML/CSS', value: 60, description: "Skilled in semantic HTML and responsive CSS for accessible, modern UIs." },
-  { label: 'UX', value: 40, description: "Focus on user experience, usability, and intuitive design principles." },
-  { label: 'DevOps', value: 50, description: "Experience with CI/CD pipelines, Docker, and cloud deployments." },
-  { label: 'Cloud', value: 70, description: "Worked with Azure and AWS for deploying and scaling cloud-native apps." },
-  { label: 'AI/ML', value: 40, description: "Exploring AI/ML concepts and applying them to real-world problems." }
+  {
+    label: '.Net',
+    value: 90,
+    description:
+      'Expert in .NET Core and ASP.NET for building scalable web APIs and enterprise applications.',
+  },
+  {
+    label: 'Java',
+    value: 60,
+    description:
+      'Solid experience with Java for backend services, Android apps, and cross-platform solutions.',
+  },
+  {
+    label: 'Python',
+    value: 40,
+    description: 'Used Python for scripting, automation, and data analysis tasks.',
+  },
+  {
+    label: 'SQL',
+    value: 60,
+    description: 'Proficient in SQL for designing, querying, and optimizing relational databases.',
+  },
+  {
+    label: 'NoSQL',
+    value: 30,
+    description: 'Familiar with NoSQL databases like MongoDB for flexible, scalable data storage.',
+  },
+  {
+    label: 'Front End',
+    value: 80,
+    description: 'Strong front-end skills using React, TypeScript, and modern CSS frameworks.',
+  },
+  {
+    label: 'JavaScript',
+    value: 60,
+    description: 'Experienced with JavaScript ES6+, building interactive and dynamic web apps.',
+  },
+  {
+    label: 'TypeScript',
+    value: 80,
+    description: 'Advocate for TypeScript to ensure robust, maintainable codebases.',
+  },
+  {
+    label: 'HTML/CSS',
+    value: 60,
+    description: 'Skilled in semantic HTML and responsive CSS for accessible, modern UIs.',
+  },
+  {
+    label: 'UX',
+    value: 40,
+    description: 'Focus on user experience, usability, and intuitive design principles.',
+  },
+  {
+    label: 'DevOps',
+    value: 50,
+    description: 'Experience with CI/CD pipelines, Docker, and cloud deployments.',
+  },
+  {
+    label: 'Cloud',
+    value: 70,
+    description: 'Worked with Azure and AWS for deploying and scaling cloud-native apps.',
+  },
+  {
+    label: 'AI/ML',
+    value: 40,
+    description: 'Exploring AI/ML concepts and applying them to real-world problems.',
+  },
 ];
 
 export default function TabbedGauge() {
@@ -41,17 +95,21 @@ export default function TabbedGauge() {
   }, [activeTab]);
 
   const handleChange = (event: any, newValue: number) => {
-    if (event) { }
+    if (event) {
+      event.preventDefault();
+    }
     setActiveTab(newValue);
   };
 
   return (
-    <div style={{
-      minHeight: 'calc(100vh - 64px)',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-    }}>
+    <div
+      style={{
+        minHeight: 'calc(100vh - 64px)',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+    >
       <Tabs
         value={activeTab}
         onChange={handleChange}

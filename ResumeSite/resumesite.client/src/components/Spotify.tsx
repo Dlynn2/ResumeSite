@@ -15,24 +15,26 @@ declare global {
 const WebPlayback: React.FC<WebPlaybackProps> = ({ token }) => {
   const [player, setPlayer] = useState<any>(undefined);
   const [is_paused, setPaused] = useState(false);
-//   const [is_active, setActive] = useState(false);
+  //   const [is_active, setActive] = useState(false);
   const [current_track, setTrack] = useState<any>(null);
 
   useEffect(() => {
     if (!token) {
-      console.error("Spotify token is required for Web Playback SDK.");
+      console.error('Spotify token is required for Web Playback SDK.');
       return;
     }
-    const script = document.createElement("script");
-    script.src = "https://sdk.scdn.co/spotify-player.js";
+    const script = document.createElement('script');
+    script.src = 'https://sdk.scdn.co/spotify-player.js';
     script.async = true;
     document.body.appendChild(script);
 
     window.onSpotifyWebPlaybackSDKReady = () => {
       const player = new window.Spotify.Player({
         name: 'Web Playback SDK',
-        getOAuthToken: (cb: (token: string) => void) => { cb(token); },
-        volume: 0.5
+        getOAuthToken: (cb: (token: string) => void) => {
+          cb(token);
+        },
+        volume: 0.5,
       });
 
       setPlayer(player);
@@ -73,14 +75,16 @@ const WebPlayback: React.FC<WebPlaybackProps> = ({ token }) => {
     <>
       <div className="container">
         <div className="main-wrapper">
-          {current_track && current_track.album && current_track.album.images && current_track.album.images[0] ? (
-            <img
-              src={current_track.album.images[0].url}
-              className="now-playing__cover"
-              alt=""
-            />
+          {current_track &&
+          current_track.album &&
+          current_track.album.images &&
+          current_track.album.images[0] ? (
+            <img src={current_track.album.images[0].url} className="now-playing__cover" alt="" />
           ) : (
-            <div className="now-playing__cover" style={{ width: 64, height: 64, background: '#222' }} />
+            <div
+              className="now-playing__cover"
+              style={{ width: 64, height: 64, background: '#222' }}
+            />
           )}
 
           <div className="now-playing__side">
@@ -99,7 +103,7 @@ const WebPlayback: React.FC<WebPlaybackProps> = ({ token }) => {
         &lt;&lt;
       </button>
       <button className="btn-spotify" onClick={() => player && player.togglePlay()}>
-        {is_paused ? "PLAY" : "PAUSE"}
+        {is_paused ? 'PLAY' : 'PAUSE'}
       </button>
       <button className="btn-spotify" onClick={() => player && player.nextTrack()}>
         &gt;&gt;
