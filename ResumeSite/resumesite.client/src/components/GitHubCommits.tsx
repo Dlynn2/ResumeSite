@@ -32,7 +32,7 @@ const GitHubCommits: React.FC = () => {
         setCommits(data);
         setLoading(false);
       })
-      .catch((err) => {
+      .catch(() => {
         setError('Could not load commits.');
         setLoading(false);
       });

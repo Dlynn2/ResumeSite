@@ -105,6 +105,7 @@ export default function TabbedGauge() {
   };
 
   const handleMainTabChange = (event: React.SyntheticEvent, newValue: number) => {
+    if (event) event.preventDefault();
     setMainTab(newValue);
   };
 
@@ -154,6 +155,7 @@ export default function TabbedGauge() {
             exclusive
             onChange={(event, newHighLightedSeries) => {
               if (newHighLightedSeries !== null) {
+                event.preventDefault();
                 setHighlightedItem((prev) => ({
                   ...prev,
                   seriesId: newHighLightedSeries,
