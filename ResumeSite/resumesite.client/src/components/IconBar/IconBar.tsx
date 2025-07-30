@@ -22,7 +22,17 @@ const IconBar = () => {
   return (
     <SpeedDial
       ariaLabel="Social Links"
-      sx={{ position: 'fixed', bottom: 32, right: 32, zIndex: 2000 }}
+      sx={{
+        position: 'fixed',
+        bottom: 32,
+        right: 32,
+        zIndex: 2000,
+        opacity: 0.5,
+        transition: 'opacity 0.3s',
+        '&:hover, &:focus-within': {
+          opacity: 1,
+        },
+      }}
       icon={<SpeedDialIcon />}
       direction="up"
     >

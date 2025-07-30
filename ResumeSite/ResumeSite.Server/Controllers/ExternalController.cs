@@ -142,57 +142,7 @@ namespace ResumeSite.Server.Controllers
             return null;
         }
 
-        //[HttpGet]
-        //[Route("spotifyToken")]
-        //public async Task<IActionResult> GetSpotifyToken()
-        //{
-        //    // Only allow requests from your frontend origin
-        //    var allowedOrigin = _configuration.GetValue<string>("FrontendOrigin");
-        //    var origin = Request.Headers["Origin"].ToString();
-        //    if (string.IsNullOrEmpty(origin) || !string.Equals(origin, allowedOrigin, StringComparison.OrdinalIgnoreCase))
-        //    {
-        //        return Forbid();
-        //    }
-
-
-        //    var clientId = _configuration.GetValue<string>("Spotify:ClientId") ?? "";
-        //    var clientSecret = _configuration.GetValue<string>("Spotify:ClientSecret") ?? "";
-        //    var redirectUri = _configuration.GetValue<string>("Spotify:RedirectUri") ?? "";
-        //    if (string.IsNullOrEmpty(clientId) || string.IsNullOrEmpty(clientSecret) || string.IsNullOrEmpty(redirectUri))
-        //        return StatusCode(500, "Spotify credentials not configured.");
-
-        //    var state = SpotifyAuthHelper.GenerateRandomString(16);
-        //    var query = SpotifyAuthHelper.BuildSpotifyAuthQuery(clientId, redirectUri, state);
-        //    var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, query);
-        //    var code = await _httpClient.SendAsync(httpRequestMessage);
-            
-
-        //    var tokenUrl = "https://accounts.spotify.com/api/token";
-        //    var form = new Dictionary<string, string>
-        //    {
-        //        { "code", await code.Content.ReadAsStringAsync() },
-        //        { "redirect_uri", redirectUri },
-        //        { "grant_type", "authorization_code" }
-        //    };
-
-        //    var authHeader = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes($"{clientId}:{clientSecret}"));
-        //    var httpRequest = new HttpRequestMessage(HttpMethod.Post, tokenUrl)
-        //    {
-        //        Content = new FormUrlEncodedContent(form)
-        //    };
-        //    httpRequest.Headers.Add("Authorization", $"Basic {authHeader}");
-
-        //    var response = await _httpClient.SendAsync(httpRequest);
-        //    var content = await response.Content.ReadAsStringAsync();
-
-        //    if (!response.IsSuccessStatusCode)
-        //        return StatusCode((int)response.StatusCode, content);
-
-        //    // Optionally, you can deserialize and return only the access_token
-        //    return Content(content, "application/json");
-        //}
-
-        // DTO for request body
+        
         public class SpotifyAuthRequest
         {
             public string Code { get; set; }

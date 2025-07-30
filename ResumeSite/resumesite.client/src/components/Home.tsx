@@ -1,6 +1,8 @@
 import { Typography, Box, Button, Stack, useTheme, Avatar } from '@mui/material';
 import { motion } from 'framer-motion';
 import backgroundImage from '../../public/images/background.png'; // Adjust the path as necessary
+import GitHubCommits from './GitHubCommits';
+
 const Home = () => {
   const theme = useTheme();
 
@@ -93,6 +95,9 @@ const Home = () => {
             Contact Me
           </Button>
         </Stack>
+        <Box sx={{ mt: 4 }}>
+          <GitHubCommits />
+        </Box>
       </motion.div>
     </Box>
   );
