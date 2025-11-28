@@ -25,12 +25,12 @@ const tabData = [
   },
   {
     label: 'SQL',
-    value: 60,
+    value: 80,
     description: 'Proficient in SQL for designing, querying, and optimizing relational databases.',
   },
   {
     label: 'NoSQL',
-    value: 30,
+    value: 60,
     description: 'Familiar with NoSQL databases like MongoDB for flexible, scalable data storage.',
   },
   {
@@ -40,7 +40,7 @@ const tabData = [
   },
   {
     label: 'JavaScript',
-    value: 60,
+    value: 80,
     description: 'Experienced with JavaScript ES6+, building interactive and dynamic web apps.',
   },
   {
@@ -50,7 +50,7 @@ const tabData = [
   },
   {
     label: 'HTML/CSS',
-    value: 60,
+    value: 70,
     description: 'Skilled in semantic HTML and responsive CSS for accessible, modern UIs.',
   },
   {
@@ -60,7 +60,7 @@ const tabData = [
   },
   {
     label: 'DevOps',
-    value: 50,
+    value: 60,
     description: 'Experience with CI/CD pipelines, Docker, and cloud deployments.',
   },
   {
@@ -121,17 +121,22 @@ export default function TabbedGauge() {
     return `${v}%`;
   }
 
-  const series = [
-    {
-      id: 'skills',
-      label: 'My Skills',
-      data: tabData.map(skill => skill.value),
-      valueFormatter,
-    },
-  ];
-  const radar = {
-    metrics: tabData.map(skill => skill.label),
-  };
+  // Replace your series and radar definitions with:
+const radarMetrics = tabData.map(skill => skill.label);
+
+const series = [
+  {
+    id: 'skills',
+    label: 'My Skills',
+    data: tabData.map(skill => skill.value), // <-- Array of numbers!
+    valueFormatter,
+  },
+];
+
+const radar = {
+  metrics: radarMetrics,
+  max: 100, // Optional: set max value for better scaling
+};
 
   return (
     <Box sx={{ width: '100%', minHeight: 'calc(100vh - 64px)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
