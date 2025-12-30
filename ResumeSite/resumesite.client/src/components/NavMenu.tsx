@@ -38,21 +38,6 @@ const NavMenu: React.FC = () => {
     setAnchorElNav(null);
   };
 
-  const scrollToSection = (sectionId: string) => {
-    handleCloseNavMenu();
-    // Remove # if it exists to get the element ID
-    const elementId = sectionId.startsWith('#') ? sectionId.substring(1) : sectionId;
-    const element = document.getElementById(elementId);
-    
-    if (element) {
-      const offsetTop = element.getBoundingClientRect().top + window.pageYOffset - 80;
-      window.scrollTo({
-        top: offsetTop,
-        behavior: 'smooth',
-      });
-    }
-  };
-
   const handleToggleTheme = () => {
     colorMode.toggleColorMode();
   };

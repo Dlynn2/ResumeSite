@@ -115,7 +115,7 @@ const Inspiration: React.FC = () => {
     if (starsContainerRef.current) {
       const stars = starsContainerRef.current.querySelectorAll(`.${styles.shooting_star}`);
       
-      stars.forEach((star, index) => {
+      stars.forEach((star) => {
         const tl = gsap.timeline({ repeat: -1, delay: Math.random() * 5 });
         
         // Set random starting position
