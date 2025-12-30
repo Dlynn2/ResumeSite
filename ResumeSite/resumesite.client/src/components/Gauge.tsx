@@ -139,7 +139,7 @@ const radar = {
 };
 
   return (
-    <Box sx={{ width: '100%', minHeight: 'calc(100vh - 64px)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', py: 4 }}>
       <Tabs
         value={mainTab}
         onChange={handleMainTabChange}

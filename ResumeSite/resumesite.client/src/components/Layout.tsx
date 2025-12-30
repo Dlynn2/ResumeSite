@@ -21,12 +21,14 @@ export class Layout extends Component<LayoutProps> {
           maxWidth={false}
           disableGutters
           sx={{
-            minHeight: 'calc(100vh - 64px)', // Use calc to subtract navbar height
+            minHeight: '100vh',
             width: '100%',
             display: 'flex',
             flexDirection: 'column',
             padding: 0,
-            pt: { xs: '56px', sm: '64px' },
+            margin: 0,
+            pt: 0,
+            backgroundColor: 'transparent',
           }}
         >
           {this.props.children}

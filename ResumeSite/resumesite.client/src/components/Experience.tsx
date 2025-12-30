@@ -1,13 +1,15 @@
 import { Component, JSX } from 'react';
 import { Typography, Card, CardMedia, CardContent, Box, Chip, Stack } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import CDCNLogo from '/images/CDCN_Logo.png';
-import ampdLogo from '/images/logo_original.png';
-import MSULogo from '/images/Montana_State_Bobcats_logo.svg.png';
-import GapFillersLogo from '/images/gap-fillers-flathead-logo.png';
-import FamilyTree from '/images/treeFavicon.ico';
-import NewLogo from '/images/LogoNewGold.png';
 import { motion } from 'framer-motion';
+
+// Use public path URLs instead of imports
+const CDCNLogo = '/images/CDCN_Logo.png';
+const ampdLogo = '/images/logo_original.png';
+const MSULogo = '/images/Montana_State_Bobcats_logo.svg.png';
+const GapFillersLogo = '/images/gap-fillers-flathead-logo.png';
+const FamilyTree = '/images/treeFavicon.ico';
+const NewLogo = '/images/LogoNewGold.png';
 
 class Experience extends Component {
   renderExperienceItem(logo: string, heading: string, description: JSX.Element) {
@@ -34,10 +36,16 @@ class Experience extends Component {
 
           <Grid size={{ xs: 12, sm: 8 }}>
             <CardContent sx={{ backgroundColor: 'transparent', backgroundImage: 'none' }}>
-              <Typography variant="h5" component="div">
+              <Typography 
+                variant="h5" 
+                component="div"
+                sx={{ color: 'text.primary', mb: 2 }}
+              >
                 {heading}
               </Typography>
-              {description}
+              <Box sx={{ color: 'text.primary' }}>
+                {description}
+              </Box>
             </CardContent>
           </Grid>
         </Grid>
@@ -48,9 +56,6 @@ class Experience extends Component {
   render() {
     return (
       <Box sx={{ flexGrow: 1, padding: 2 }}>
-        <Typography variant="h4" gutterBottom component="div">
-          What I&apos;m doing
-        </Typography>
 
         {this.renderExperienceItem(
           FamilyTree,

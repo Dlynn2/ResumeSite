@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import AppRoutes from './AppRoutes';
+import { BrowserRouter } from 'react-router-dom';
+import SinglePageHome from './components/SinglePageHome';
 import IconBar from './components/IconBar/IconBar';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -49,12 +49,7 @@ export function App() {
   return (
     <BrowserRouter>
       <Layout>
-        <Routes>
-          {AppRoutes.map((route, index) => (
-            <Route key={index} path={route.path} element={route.element} index={route.index} />
-          ))}
-        </Routes>
-        {/* Place IconBar and ToastContainer within the Layout component */}
+        <SinglePageHome />
       </Layout>
       <IconBar />
       <ToastContainer />
@@ -84,15 +79,15 @@ export default function ToggleColorMode() {
   );
 
   const lightPalette = {
-    primary: { main: '#7c3aed' }, // Purple
-    secondary: { main: '#f59e0b' }, // Amber
+    primary: { main: '#7c3aed', light: '#a855f7', dark: '#6d28d9' }, // Purple
+    secondary: { main: '#f59e0b', light: '#fbbf24', dark: '#d97706' }, // Amber
     background: { default: '#fafaf9', paper: '#ffffff' },
     text: { primary: '#1c1917', secondary: '#78716c' },
   };
 
   const darkPalette = {
-    primary: { main: '#a855f7' }, // Light purple
-    secondary: { main: '#fbbf24' }, // Light amber
+    primary: { main: '#a855f7', light: '#c084fc', dark: '#9333ea' }, // Light purple
+    secondary: { main: '#fbbf24', light: '#fcd34d', dark: '#f59e0b' }, // Light amber
     background: { default: '#0c0a09', paper: '#1c1917' },
     text: { primary: '#fafaf9', secondary: '#a8a29e' },
   };
@@ -104,6 +99,45 @@ export default function ToggleColorMode() {
           mode: mode,
           ...(mode === 'dark' ? darkPalette : lightPalette),
         },
+        typography: {
+          fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
+          h1: { fontWeight: 800 },
+          h2: { fontWeight: 700 },
+          h3: { fontWeight: 700 },
+          h4: { fontWeight: 600 },
+          h5: { fontWeight: 600 },
+          h6: { fontWeight: 500 },
+        },
+        shape: {
+          borderRadius: 12,
+        },
+        shadows: [
+          'none',
+          '0 1px 2px 0 rgb(0 0 0 / 0.05)',
+          '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
+          '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+          '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
+          '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
+          '0 25px 50px -12px rgb(0 0 0 / 0.25)',
+          '0 25px 50px -12px rgb(0 0 0 / 0.25)',
+          '0 25px 50px -12px rgb(0 0 0 / 0.35)',
+          '0 25px 50px -12px rgb(0 0 0 / 0.35)',
+          '0 25px 50px -12px rgb(0 0 0 / 0.45)',
+          '0 25px 50px -12px rgb(0 0 0 / 0.45)',
+          '0 25px 50px -12px rgb(0 0 0 / 0.55)',
+          '0 25px 50px -12px rgb(0 0 0 / 0.55)',
+          '0 25px 50px -12px rgb(0 0 0 / 0.65)',
+          '0 25px 50px -12px rgb(0 0 0 / 0.65)',
+          '0 25px 50px -12px rgb(0 0 0 / 0.75)',
+          '0 25px 50px -12px rgb(0 0 0 / 0.75)',
+          '0 25px 50px -12px rgb(0 0 0 / 0.85)',
+          '0 25px 50px -12px rgb(0 0 0 / 0.85)',
+          '0 25px 50px -12px rgb(0 0 0 / 0.95)',
+          '0 25px 50px -12px rgb(0 0 0 / 0.95)',
+          '0 25px 50px -12px rgb(0 0 0 / 1)',
+          '0 25px 50px -12px rgb(0 0 0 / 1)',
+          '0 25px 50px -12px rgb(0 0 0 / 1)',
+        ],
       }),
     [mode]
   );

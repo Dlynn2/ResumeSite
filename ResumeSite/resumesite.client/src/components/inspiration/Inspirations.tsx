@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import {
   Container,
   TextField,
@@ -13,6 +13,7 @@ import { toast } from 'react-toastify';
 import styles from './Inspirations.module.scss';
 import { motion } from 'framer-motion';
 import { ColorModeContext } from '../../App';
+import gsap from 'gsap';
 
 interface IState {
   APODUrl: string;
@@ -24,6 +25,9 @@ const Inspiration: React.FC = () => {
   const theme = useTheme();
   // const [token, setToken] = useState('');
   const colorMode = useContext(ColorModeContext);
+  const starsContainerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const hasShownToastRef = useRef(false);
   const [state, setState] = useState<IState>({
     APODUrl: '',
     APODExplanation: '',
@@ -73,34 +77,138 @@ const Inspiration: React.FC = () => {
   useEffect(() => {
     // getToken();
     populateAPOD(new Date());
+  }, []);
 
-    if (theme.palette.mode === 'light') {
-      toast.info('Click here to experience the stars at night!', {
-        position: 'bottom-center',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        toastId: 'dark-mode-recommendation', // prevents duplicate toasts
-        onClick: () => colorMode.toggleColorMode(),
+  // Separate effect to show toast only when section becomes visible
+  useEffect(() => {
+    if (!containerRef.current || hasShownToastRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasShownToastRef.current && theme.palette.mode === 'light') {
+            hasShownToastRef.current = true;
+            toast.info('Click here to experience the stars at night!', {
+              position: 'bottom-center',
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              toastId: 'dark-mode-recommendation',
+              onClick: () => colorMode.toggleColorMode(),
+            });
+          }
+        });
+      },
+      { threshold: 0.3 } // Trigger when 30% of the section is visible
+    );
+
+    observer.observe(containerRef.current);
+
+    return () => observer.disconnect();
+  }, [theme.palette.mode, colorMode]);
+
+  useEffect(() => {
+    // Animate stars with GSAP
+    if (starsContainerRef.current) {
+      const stars = starsContainerRef.current.querySelectorAll(`.${styles.shooting_star}`);
+      
+      stars.forEach((star, index) => {
+        const tl = gsap.timeline({ repeat: -1, delay: Math.random() * 5 });
+        
+        // Set random starting position
+        gsap.set(star, {
+          top: `${-20 + Math.random() * 40}%`,
+          left: `${-20 + Math.random() * 40}%`,
+          opacity: 0,
+          scale: Math.random() * 0.5 + 0.5,
+          rotation: 225, // Rotated 180 degrees from original 45
+        });
+
+        // Shooting star animation at 45 degree angle
+        const distance = 500 + Math.random() * 300;
+        tl.to(star, {
+          opacity: 1,
+          duration: 0.1,
+          ease: 'power1.in',
+        })
+        .to(star, {
+          left: `+=${distance}px`,
+          top: `+=${distance}px`, // Move diagonally by same amount
+          duration: 1.5 + Math.random() * 1.5,
+          ease: 'power1.out',
+        }, '<')
+        .to(star, {
+          opacity: 0,
+          duration: 0.3,
+          ease: 'power1.out',
+        }, '-=0.3')
+        .to(star, {
+          delay: 2 + Math.random() * 8,
+        });
       });
+
+      // Add twinkling static stars
+      const container = starsContainerRef.current;
+      for (let i = 0; i < 50; i++) {
+        const twinkleStar = document.createElement('div');
+        twinkleStar.style.position = 'absolute';
+        twinkleStar.style.width = `${1 + Math.random() * 2}px`;
+        twinkleStar.style.height = `${1 + Math.random() * 2}px`;
+        twinkleStar.style.backgroundColor = '#fff';
+        twinkleStar.style.borderRadius = '50%';
+        twinkleStar.style.top = `${Math.random() * 100}%`;
+        twinkleStar.style.left = `${Math.random() * 100}%`;
+        twinkleStar.style.boxShadow = '0 0 3px #fff';
+        container.appendChild(twinkleStar);
+
+        gsap.to(twinkleStar, {
+          opacity: Math.random() * 0.5 + 0.3,
+          duration: 0.5 + Math.random() * 2,
+          repeat: -1,
+          yoyo: true,
+          ease: 'power1.inOut',
+          delay: Math.random() * 2,
+        });
+      }
+
+      // Add occasional bright flash stars
+      for (let i = 0; i < 5; i++) {
+        const flashStar = document.createElement('div');
+        flashStar.style.position = 'absolute';
+        flashStar.style.width = '4px';
+        flashStar.style.height = '4px';
+        flashStar.style.backgroundColor = '#5f91ff';
+        flashStar.style.borderRadius = '50%';
+        flashStar.style.top = `${Math.random() * 100}%`;
+        flashStar.style.left = `${Math.random() * 100}%`;
+        flashStar.style.boxShadow = '0 0 10px #5f91ff, 0 0 20px #5f91ff';
+        flashStar.style.opacity = '0';
+        container.appendChild(flashStar);
+
+        gsap.to(flashStar, {
+          opacity: 1,
+          scale: 1.5,
+          duration: 0.2,
+          repeat: -1,
+          repeatDelay: 5 + Math.random() * 10,
+          yoyo: true,
+          ease: 'power2.inOut',
+          delay: Math.random() * 5,
+        });
+      }
     }
-  }, [theme.palette.mode]);
+  }, []); // Empty dependency array - only run on mount
 
   const renderShootingStars = () => {
     const stars = [];
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 8; i++) {
       stars.push(
         <Box
           key={i}
           className={styles.shooting_star}
-          style={{
-            top: `${5 + Math.random() * 90}%`, // Avoid 0% and 100%
-            left: `${Math.random() * 100}%`,
-            animationDelay: `${Math.random() * 20}s`,
-          }}
         />
       );
     }
@@ -109,6 +217,7 @@ const Inspiration: React.FC = () => {
 
   return (
     <Container
+      ref={containerRef}
       sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -130,15 +239,15 @@ const Inspiration: React.FC = () => {
       />
 
       <Box
-        className={styles.rotate}
+        ref={starsContainerRef}
         sx={{
           position: 'absolute',
-          width: '100%',
-          height: 'calc(100vh - 64px)',
+          width: '200%',
+          height: '200%',
           pointerEvents: 'none',
-          left: '-10%',
-          top: 0,
-          overflow: 'hidden', // Prevent scrollbars
+          left: '-50%',
+          top: '-50%',
+          overflow: 'hidden',
           zIndex: 0,
         }}
       >

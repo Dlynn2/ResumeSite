@@ -1,5 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Box, Typography, List, ListItem, ListItemText, CircularProgress, Link } from '@mui/material';
+import gsap from 'gsap';
+import { TextPlugin } from 'gsap/TextPlugin';
+
+gsap.registerPlugin(TextPlugin);
 
 interface Commit {
   sha: string;
@@ -21,8 +25,42 @@ const GitHubCommits: React.FC = () => {
   const [commits, setCommits] = useState<Commit[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const titleRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
+    // Scramble text animation on title
+    const scrambleText = () => {
+      if (titleRef.current) {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
+        const originalText = 'Latest GitHub Commits For This Project';
+        let iteration = 0;
+        
+        const interval = setInterval(() => {
+          if (titleRef.current) {
+            titleRef.current.innerText = originalText
+              .split('')
+              .map((char, index) => {
+                if (index < iteration) {
+                  return originalText[index];
+                }
+                if (char === ' ') return ' ';
+                return chars[Math.floor(Math.random() * chars.length)];
+              })
+              .join('');
+            
+            iteration += 1 / 3;
+            
+            if (iteration >= originalText.length) {
+              clearInterval(interval);
+              if (titleRef.current) {
+                titleRef.current.innerText = originalText;
+              }
+            }
+          }
+        }, 30);
+      }
+    };
+
     fetch(COMMITS_API)
       .then((res) => {
         if (!res.ok) throw new Error('Failed to fetch commits');
@@ -31,6 +69,10 @@ const GitHubCommits: React.FC = () => {
       .then((data) => {
         setCommits(data);
         setLoading(false);
+        
+        // Wait for name scramble to finish (about 2 seconds total from page load)
+        // Then scramble the GitHub title
+        setTimeout(scrambleText, 1500);
       })
       .catch(() => {
         setError('Could not load commits.');
@@ -48,7 +90,7 @@ const GitHubCommits: React.FC = () => {
   return (
     <Box sx={{ mt: 4 }}>
       <Typography variant="h6" gutterBottom>
-        Latest GitHub Commits For This Project
+        <span ref={titleRef}>Latest GitHub Commits For This Project</span>
       </Typography>
       <List>
         {commits.map((commit) => (

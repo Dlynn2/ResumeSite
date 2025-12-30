@@ -10,31 +10,47 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AppRoutes from '../AppRoutes';
-import { RouteObject, useNavigate } from 'react-router-dom';
 import MyLogo from './Logo';
 import { ColorModeContext } from '../App';
 import { useTheme } from '@mui/material';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 
-const pages = AppRoutes.filter((route) => route.id);
+const sections = [
+  { id: 'home', label: 'Home', path: '#home' },
+  { id: 'skills', label: 'Skills', path: '#skills' },
+  { id: 'experience', label: 'Experience', path: '#experience' },
+  { id: 'inspiration', label: 'Inspiration', path: '#inspiration' },
+  { id: 'analytics', label: 'Analytics', path: '#analytics' },
+  { id: 'contact', label: 'Contact', path: '#contact' },
+];
 
 const NavMenu: React.FC = () => {
   const theme = useTheme();
   const colorMode = React.useContext(ColorModeContext);
-  const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
 
-  const handleCloseNavMenu = (route?: RouteObject) => {
-    if (route?.path) {
-      navigate(route.path);
-    }
+  const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+
+  const scrollToSection = (sectionId: string) => {
+    handleCloseNavMenu();
+    // Remove # if it exists to get the element ID
+    const elementId = sectionId.startsWith('#') ? sectionId.substring(1) : sectionId;
+    const element = document.getElementById(elementId);
+    
+    if (element) {
+      const offsetTop = element.getBoundingClientRect().top + window.pageYOffset - 80;
+      window.scrollTo({
+        top: offsetTop,
+        behavior: 'smooth',
+      });
+    }
   };
 
   const handleToggleTheme = () => {
@@ -96,10 +112,15 @@ const NavMenu: React.FC = () => {
                 },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page.id} onClick={() => handleCloseNavMenu(page)}>
+              {sections.map((section) => (
+                <MenuItem 
+                  key={section.id} 
+                  component="a"
+                  href={section.path}
+                  onClick={handleCloseNavMenu}
+                >
                   <Typography textAlign="center" color={theme.palette.text.primary}>
-                    {page.id}
+                    {section.label}
                   </Typography>
                 </MenuItem>
               ))}
@@ -110,10 +131,10 @@ const NavMenu: React.FC = () => {
           <Box
             sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', ml: 3, flexGrow: 1 }}
           >
-            {pages.map((page) => (
+            {sections.map((section) => (
               <Button
-                key={page.id}
-                onClick={() => handleCloseNavMenu(page)}
+                key={section.id}
+                href={section.path}
                 sx={{
                   mx: 1,
                   px: 2,
@@ -128,7 +149,7 @@ const NavMenu: React.FC = () => {
                   },
                 }}
               >
-                {page.id}
+                {section.label}
               </Button>
             ))}
           </Box>
