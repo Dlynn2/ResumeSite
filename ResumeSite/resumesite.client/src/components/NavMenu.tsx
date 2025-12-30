@@ -29,6 +29,32 @@ const NavMenu: React.FC = () => {
   const theme = useTheme();
   const colorMode = React.useContext(ColorModeContext);
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
+  const [scrolled, setScrolled] = React.useState(false);
+  const [isHovered, setIsHovered] = React.useState(false);
+
+  React.useEffect(() => {
+    // Observe the hero section to determine when to show navbar
+    const heroSection = document.getElementById('home');
+    
+    if (!heroSection) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // When hero section is NOT intersecting (out of view), show navbar
+        setScrolled(!entry.isIntersecting);
+      },
+      {
+        threshold: 0.1, // Trigger when 10% of hero is visible
+        rootMargin: '-80px 0px 0px 0px', // Offset by navbar height
+      }
+    );
+
+    observer.observe(heroSection);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -45,12 +71,21 @@ const NavMenu: React.FC = () => {
   return (
     <AppBar
       position="fixed"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       sx={{
+        top: scrolled ? 0 : '-100px',
+        left: 0,
+        right: 0,
+        zIndex: 1300,
         backgroundColor:
-          theme.palette.mode === 'dark' ? 'rgba(15, 23, 42, 0.95)' : 'rgba(255, 255, 255, 0.95)',
+          theme.palette.mode === 'dark' 
+            ? isHovered ? 'rgba(15, 23, 42, 0.95)' : 'rgba(15, 23, 42, 0.7)' 
+            : isHovered ? 'rgba(255, 255, 255, 0.95)' : 'rgba(255, 255, 255, 0.7)',
         backdropFilter: 'blur(8px)',
         borderBottom: `1px solid ${theme.palette.divider}`,
         boxShadow: theme.shadows[1],
+        transition: 'top 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease',
       }}
     >
       <Container maxWidth="xl">

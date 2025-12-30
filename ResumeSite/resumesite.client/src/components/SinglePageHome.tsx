@@ -165,7 +165,7 @@ const SinglePageHome = () => {
   return (
     <Box sx={{ 
       width: '100%', 
-      overflow: 'hidden',
+      overflow: 'visible',
       backgroundColor: 'transparent',
       '& *': {
         boxSizing: 'border-box',
@@ -320,7 +320,7 @@ const SinglePageHome = () => {
               Contact Me
             </Button>
           </Stack>
-          <Box sx={{ mt: 4 }}>
+          <Box sx={{ mt: 4, mb: 10 }}>
             <GitHubCommits />
           </Box>
         </Box>
@@ -333,6 +333,7 @@ const SinglePageHome = () => {
             left: '50%',
             transform: 'translateX(-50%)',
             animation: 'bounce 2s ease-in-out infinite',
+            zIndex: 3,
           }}
         >
           <Typography variant="caption" sx={{ color: theme.palette.text.secondary, mb: 1, display: 'block' }}>
