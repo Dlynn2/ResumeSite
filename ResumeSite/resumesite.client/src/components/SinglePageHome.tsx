@@ -50,22 +50,19 @@ const SinglePageHome = () => {
         { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }
       );
 
-      // Animate name on mobile with simpler animation
+      // Animate name on mobile with simpler fade-in animation (no letter-by-letter to avoid issues)
       if (nameRef.current) {
-        const text = 'Dylan Lynn';
-        nameRef.current.innerHTML = text
-          .split('')
-          .map((char) => `<span class="name-char" style="display:inline-block;opacity:0;transform:translateY(15px);">${char === ' ' ? '&nbsp;' : char}</span>`)
-          .join('');
+        nameRef.current.textContent = 'Dylan Lynn';
+        nameRef.current.style.opacity = '0';
+        nameRef.current.style.transform = 'translateY(15px)';
         
         setTimeout(() => {
-          const chars = nameRef.current?.querySelectorAll('.name-char');
-          chars?.forEach((char, i) => {
-            (char as HTMLElement).style.transition = `opacity 0.4s ease ${i * 0.04}s, transform 0.4s ease ${i * 0.04}s`;
-            (char as HTMLElement).style.opacity = '1';
-            (char as HTMLElement).style.transform = 'translateY(0)';
-          });
-        }, 300);
+          if (nameRef.current) {
+            nameRef.current.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            nameRef.current.style.opacity = '1';
+            nameRef.current.style.transform = 'translateY(0)';
+          }
+        }, 400);
       }
 
       return () => observer.disconnect();

@@ -27,11 +27,14 @@ const GitHubCommits: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const titleRef = useRef<HTMLSpanElement>(null);
 
+  // Check if mobile to disable scramble animation
+  const isMobile = window.matchMedia('(max-width:768px)').matches;
+
   useEffect(() => {
-    // Scramble text animation on title
+    // Scramble text animation on title (desktop only to prevent layout issues on mobile)
     const scrambleText = () => {
-      if (titleRef.current) {
-        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
+      if (titleRef.current && !isMobile) {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         const originalText = 'Latest GitHub Commits For This Project';
         let iteration = 0;
         
@@ -48,7 +51,7 @@ const GitHubCommits: React.FC = () => {
               })
               .join('');
             
-            iteration += 1 / 3;
+            iteration += 1 / 2; // Faster iteration
             
             if (iteration >= originalText.length) {
               clearInterval(interval);
@@ -89,8 +92,15 @@ const GitHubCommits: React.FC = () => {
 
   return (
     <Box sx={{ mt: 4 }}>
-      <Typography variant="h6" gutterBottom>
-        <span ref={titleRef}>Latest GitHub Commits For This Project</span>
+      <Typography 
+        variant="h6" 
+        gutterBottom
+        sx={{ 
+          fontFamily: 'monospace',
+          minHeight: '1.5em',
+        }}
+      >
+        <span ref={titleRef} style={{ display: 'inline-block', minWidth: '100%' }}>Latest GitHub Commits For This Project</span>
       </Typography>
       <List>
         {commits.map((commit) => (
