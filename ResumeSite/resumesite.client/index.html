@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="./public/images/LogoNewGold.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)" />
+    <meta name="description" content="Dylan Lynn - Full Stack Developer. Professional resume, projects, and portfolio." />
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <title>Dylan Lynn – Professional Resume & Projects</title>
     <style>
       html, body {
@@ -13,10 +18,28 @@
         height: auto;
         overflow-x: hidden;
         overflow-y: auto;
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        scroll-behavior: smooth;
       }
       #root {
         width: 100%;
         height: auto;
+      }
+      /* Prevent text size adjustment on orientation change */
+      * {
+        -webkit-text-size-adjust: 100%;
+        -moz-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+      }
+      /* Smooth tap highlights on mobile */
+      a, button {
+        -webkit-tap-highlight-color: rgba(168, 85, 247, 0.2);
+      }
+      /* GPU acceleration hint for animations */
+      .hero-content, .skills-section, .experience-section, 
+      .inspiration-section, .analytics-section, .contact-section {
+        will-change: transform, opacity;
       }
     </style>
   </head>
