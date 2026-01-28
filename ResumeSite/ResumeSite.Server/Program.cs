@@ -36,7 +36,8 @@ builder.Services.AddCors(options =>
     {
         policy.WithOrigins(builder.Configuration["FrontendOrigin"])
               .AllowAnyHeader()
-              .AllowAnyMethod();
+              .AllowAnyMethod()
+              .AllowCredentials();
     });
 });
 
@@ -53,7 +54,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// Only redirect to HTTPS in production or when HTTPS is configured
+var useHttps = !string.IsNullOrEmpty(app.Configuration["ASPNETCORE_URLS"]) && 
+                app.Configuration["ASPNETCORE_URLS"].Contains("https");
+if (useHttps)
+{
+    app.UseHttpsRedirection();
+}
 
 app.UseAuthorization();
 app.MapHealthChecks("/health");

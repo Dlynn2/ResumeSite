@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  # Frontend service (Nginx serving the built React app)
+  frontend:
+    build:
+      context: .
+      dockerfile: ResumeSite/resumesite.client/Dockerfile
+    ports:
+      - "3000:80"
+    environment:
+      - VITE_API_URL=http://backend:8080
+    depends_on:
+      - backend
+    networks:
+      - resumesite-network
+
+  # Backend API service
+  backend:
+    build:
+      context: .
+      dockerfile: ResumeSite/ResumeSite.Server/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__RESUMESITECONNECTIONSTRING=${DB_CONNECTION_STRING}
+      - FrontendOrigin=http://localhost:3000
+    networks:
+      - resumesite-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+networks:
+  resumesite-network:
+    driver: bridge

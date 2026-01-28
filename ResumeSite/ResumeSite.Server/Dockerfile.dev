@@ -1,0 +1,26 @@
+# Development Dockerfile with hot reloading
+FROM mcr.microsoft.com/dotnet/sdk:8.0
+
+WORKDIR /src
+
+# Install dotnet watch tools
+ENV DOTNET_USE_POLLING_FILE_WATCHER=true
+ENV ASPNETCORE_ENVIRONMENT=Development
+ENV SKIP_SPA_BUILD=true
+
+# Copy just the server project file (no client reference needed in dev)
+COPY ["ResumeSite/ResumeSite.Server/ResumeSite.Server.csproj", "ResumeSite/ResumeSite.Server/"]
+
+# Restore dependencies
+RUN dotnet restore "ResumeSite/ResumeSite.Server/ResumeSite.Server.csproj"
+
+# Copy the rest of the server code
+COPY ResumeSite/ResumeSite.Server/ ./ResumeSite/ResumeSite.Server/
+
+# Set working directory to the project folder
+WORKDIR /src/ResumeSite/ResumeSite.Server
+
+EXPOSE 8080
+
+# Use dotnet watch for hot reloading
+CMD ["dotnet", "watch", "run", "--urls", "http://+:8080", "--no-launch-profile"]

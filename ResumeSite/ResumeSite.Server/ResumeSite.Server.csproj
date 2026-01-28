@@ -34,9 +34,11 @@
     <PackageReference Include="System.Linq" Version="4.3.0" />
     <PackageReference Include="UAParser" Version="3.1.47" />
   </ItemGroup>
-	<ItemGroup>
-		<ProjectReference Include="..\resumesite.client\resumesite.client.esproj">
-			<ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-		</ProjectReference>
-	</ItemGroup>
+  
+  <!-- Skip frontend build ONLY in dev containers, allow in production and local dev -->
+  <ItemGroup Condition="'$(SKIP_SPA_BUILD)' != 'true'">
+    <ProjectReference Include="..\resumesite.client\resumesite.client.esproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

@@ -47,14 +47,24 @@ const Inspiration: React.FC = () => {
         throw new Error(response.statusText);
       }
 
-      const data = await response.json();
+      // Check for empty body or non-JSON
+      const contentType = response.headers.get('content-type');
+      const text = await response.text();
+      if (!text || !contentType || !contentType.includes('application/json')) {
+        setState({ APODUrl: '', APODExplanation: 'No image available for this date.', loading: false });
+        throw new Error('No data returned from NASA APOD API');
+      }
+      const data = JSON.parse(text);
 
       if (data.url) {
         setState({ APODUrl: data.url, APODExplanation: data.explanation, loading: false });
+      } else {
+        setState({ APODUrl: '', APODExplanation: 'No image available for this date.', loading: false });
       }
 
-      return data.url;
+      return data.url || '';
     } catch (error) {
+      setState({ APODUrl: '', APODExplanation: 'Failed to fetch APOD. Please try another date.', loading: false });
       console.error('Error fetching APOD:', error);
       return '';
     }
