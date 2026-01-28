@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: ResumeSite/resumesite.client/Dockerfile.dev
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./ResumeSite/resumesite.client:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    command: npm run dev -- --host 0.0.0.0
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: .
+      dockerfile: ResumeSite/ResumeSite.Server/Dockerfile.dev
+    ports:
+      - "8080:8080"
+    volumes:
+      # Mount to match the WORKDIR in Dockerfile
+      - ./ResumeSite/ResumeSite.Server:/src/ResumeSite/ResumeSite.Server
+      - /src/ResumeSite/ResumeSite.Server/bin
+      - /src/ResumeSite/ResumeSite.Server/obj
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__RESUMESITECONNECTIONSTRING=${DB_CONNECTION_STRING}
+      - FrontendOrigin=http://localhost:5173
+      - DOTNET_USE_POLLING_FILE_WATCHER=true
+    env_file:
+      - .env
